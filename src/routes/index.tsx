@@ -4,20 +4,39 @@ import {
     Switch,
     Route
 } from "react-router-dom";
+import { observer } from 'mobx-react-lite';
 
 import Auth from '../components/auth';
+import AuthStore from '../stores/auth';
 
-export default function Routes() {
+const Routes = () => {
+    const authStore = React.useContext(AuthStore);
+    console.log('Auth Store: ', authStore);
+
+    React.useEffect(() => {
+        authStore.getIsLoggedIn();
+    }, [])
+
+    if (authStore.loading) {
+        return <div />
+    }
+
     return (
         <Router>
-            <Switch>
-                <Route exact path="/home">
-                    <div>TEst page</div>
-                </Route>
-                <Route path="/">
+            {
+                authStore.user?.email ?
+                    <Switch>
+                        <Route exact path="/home">
+                            <div>TEst page</div>
+                        </Route>
+                        <Route path="/">
+                            <div>default route</div>
+                        </Route>
+                    </Switch> :
                     <Auth />
-                </Route>
-            </Switch>
+            }
         </Router>
     );
 }
+
+export default observer(Routes);
