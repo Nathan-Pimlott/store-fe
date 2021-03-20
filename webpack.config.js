@@ -40,9 +40,10 @@ module.exports = {
                 ],
             },
             {
-                test: /\.(png|jpg|svg)$/i,
-                loader: "file-loader",
+                test: /\.(png|svg|jpg|jpeg|gif)$/i,
+                type: 'asset/resource',
             },
+
         ],
     },
     resolve: {

@@ -5,10 +5,10 @@ import { Cookies } from 'react-cookie';
 const cookies = new Cookies;
 
 interface IUser {
-    email: string;
+    email?: string;
     password?: string;
-    forename: string;
-    surname: string;
+    forename?: string;
+    surname?: string;
 };
 
 class AuthStore {
@@ -22,16 +22,19 @@ class AuthStore {
 
     getIsLoggedIn = async () => {
         this.loading = true;
+        try {
+            const authCookie = cookies.get('user');
 
-        const authCookie = cookies.get('auth');
+            console.log('Auth Cookie: ', authCookie);
 
-        console.log('Auth Cookie: ', authCookie);
+            if (authCookie) {
+                this.user = authCookie;
+            }
 
-        if (authCookie) {
-            this.user = JSON.parse(authCookie);
+            this.loading = false;
+        } catch (error) {
+            this.loading = false;
         }
-
-        this.loading = false;
     }
 
     authenticate = async (email: string, password: string) => {
@@ -45,6 +48,9 @@ class AuthStore {
             }
             this.user = user;
             cookies.set('user', JSON.stringify(user));
+
+            console.log('Set cookie');
+
 
             this.loading = false;
         } catch (error) {

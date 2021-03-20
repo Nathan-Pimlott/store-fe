@@ -8,6 +8,7 @@ import { observer } from 'mobx-react-lite';
 
 import Auth from '../components/auth';
 import AuthStore from '../stores/auth';
+import { Typography } from "@material-ui/core";
 
 const Routes = () => {
     const authStore = React.useContext(AuthStore);
@@ -30,7 +31,7 @@ const Routes = () => {
                             <div>TEst page</div>
                         </Route>
                         <Route path="/">
-                            <div>default route</div>
+                            <Typography variant='h1'>You're Logged In!</Typography>
                         </Route>
                     </Switch> :
                     <Auth />
