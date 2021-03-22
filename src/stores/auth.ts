@@ -1,6 +1,8 @@
 import { createContext } from 'react';
 import { makeAutoObservable } from 'mobx';
 import { Cookies } from 'react-cookie';
+import axios from 'axios';
+import adapter from 'axios/lib/adapters/http';
 
 const cookies = new Cookies;
 
@@ -13,7 +15,10 @@ interface IUser {
 
 class AuthStore {
     user: IUser | null = null;
+    // Used for routing
     loading: boolean = false;
+    // Used for rendering loading screen
+    processing: boolean = false;
     error: string | null = null;
 
     constructor() {
@@ -39,7 +44,23 @@ class AuthStore {
 
     authenticate = async (email: string, password: string) => {
         try {
-            this.loading = true;
+            this.processing = true;
+
+            // console.log('About to call');
+
+            // let userRes = await axios.post(
+            //     `${process.env.STORE_API}/user/authenticate`,
+            //     {
+            //         email,
+            //         password
+            //     },
+            //     {
+            //         adapter
+            //     }
+            // );
+
+            // console.log('User Res: ', userRes);
+
 
             const user = {
                 email,
@@ -52,9 +73,23 @@ class AuthStore {
             console.log('Set cookie');
 
 
+            this.processing = false;
+        } catch (error) {
+            console.error(error.message)
+            this.error = error.message;
+        }
+    }
+
+    logout = async () => {
+        try {
+            this.loading = true;
+
+            this.user = null;
+            cookies.remove('user');
+
             this.loading = false;
         } catch (error) {
-            this.error = error.message;
+            this.loading = false;
         }
     }
 }

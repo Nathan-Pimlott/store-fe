@@ -5,10 +5,11 @@ import {
     Route
 } from "react-router-dom";
 import { observer } from 'mobx-react-lite';
+import { Typography } from "@material-ui/core";
 
 import Auth from '../components/auth';
 import AuthStore from '../stores/auth';
-import { Typography } from "@material-ui/core";
+import Header from '../core/header';
 
 const Routes = () => {
     const authStore = React.useContext(AuthStore);
@@ -27,6 +28,7 @@ const Routes = () => {
             {
                 authStore.user?.email ?
                     <Switch>
+                        <Header />
                         <Route exact path="/home">
                             <div>TEst page</div>
                         </Route>

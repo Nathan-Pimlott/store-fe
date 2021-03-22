@@ -7,6 +7,10 @@ const {
 const {
     CleanWebpackPlugin
 } = require("clean-webpack-plugin");
+const webpack = require('webpack');
+const dotenv = require('dotenv');
+
+dotenv.config();
 
 module.exports = {
     entry: path.resolve(__dirname, "src/index.tsx"),
@@ -58,6 +62,9 @@ module.exports = {
         new MiniCssExtractPlugin({
             filename: "styles.[contentHash].css",
         }),
+        new webpack.DefinePlugin({
+            'process.env': JSON.stringify(dotenv.config().parsed)
+        })
     ],
     devServer: {
         historyApiFallback: true,

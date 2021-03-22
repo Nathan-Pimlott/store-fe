@@ -2,11 +2,13 @@ import * as React from 'react';
 import { TextField, Button } from '@material-ui/core';
 
 import AuthStore from '../../stores/auth';
+import Classes from '../../styles'
 
 const Logo = require('../../assets/logo.png');
 
 export default function () {
     const authStore = React.useContext(AuthStore);
+    const classes = Classes();
 
     const [state, setState] = React.useState({
         email: '',
@@ -18,64 +20,50 @@ export default function () {
     };
 
     return (
-        <div
-            style={{
-                display: 'flex',
-                flexDirection: 'column',
-                margin: 'auto',
-                minWidth: 400,
-                maxWidth: 700,
-                height: 'auto',
-                padding: 20,
-                border: '1px solid lightgrey',
-                borderRadius: 10
-            }}
-        >
-            <img
-                src={Logo}
-                style={{
-                    width: 120,
-                    height: 'auto',
-                    margin: '0 auto'
-                }}
-            />
+        <div className={classes.authOuterContainer}>
+            <div className={classes.authInnerContainer}>
+                <img
+                    src={Logo}
+                    className={classes.authLogo}
+                />
 
-            <div style={{ marginTop: 20 }} />
+                <div className={classes.largeMarginTop} />
 
-            <TextField
-                label="Email"
-                value={state.email}
-                onChange={(e) => {
-                    setState({
-                        ...state,
-                        email: e.target.value
-                    })
-                }}
-            />
+                <TextField
+                    label="Email"
+                    value={state.email}
+                    onChange={(e) => {
+                        setState({
+                            ...state,
+                            email: e.target.value
+                        })
+                    }}
+                />
 
-            <div style={{ marginTop: 20 }} />
+                <div className={classes.largeMarginTop} />
 
-            <TextField
-                label="Password"
-                value={state.password}
-                onChange={(e) => {
-                    setState({
-                        ...state,
-                        password: e.target.value
-                    })
-                }}
-            />
+                <TextField
+                    label="Password"
+                    value={state.password}
+                    onChange={(e) => {
+                        setState({
+                            ...state,
+                            password: e.target.value
+                        })
+                    }}
+                />
 
-            <div style={{ marginTop: 20 }} />
+                <div className={classes.largeMarginTop} />
 
-            <Button
-                color='primary'
-                onClick={login}
-                fullWidth
-                variant='contained'
-            >
-                Hello World
-            </Button>
+                <Button
+                    color='primary'
+                    onClick={login}
+                    fullWidth
+                    variant='contained'
+                >
+                    Hello World
+                </Button>
+            </div>
         </div>
     )
 }
