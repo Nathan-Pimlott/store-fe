@@ -5,17 +5,19 @@ import {
     Typography,
     IconButton,
     MenuItem,
-    Menu
+    Menu,
+    Link
 } from '@material-ui/core';
 import {
     Menu as MenuIcon,
-    AccountCircle
+    AccountCircle,
+    ShoppingBasket
 } from '@material-ui/icons';
 
-import AuthStore from '../stores/auth';
-import Classes from '../styles';
+import AuthStore from '../../stores/auth';
+import Classes from '../../styles';
 
-const Logo = require('../assets/logo.png');
+const Logo = require('../../assets/shenron.png');
 
 export default () => {
     const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null);
@@ -38,13 +40,27 @@ export default () => {
         <div className={classes.headerContainer}>
             <AppBar position="static">
                 <Toolbar>
-                    <IconButton edge="start" className={classes.headerMenuButton} color="inherit" aria-label="menu">
-                        <MenuIcon />
-                    </IconButton>
                     <img src={Logo} className={classes.headerIcon} />
-                    <Typography variant="h6" className={classes.headerTitle}>
-                        Store FE
-                    </Typography>
+                    <div className={classes.headerOptionsContainer}>
+                        <Link variant="body1" className={classes.headerOption} href='/mens'>
+                            Mens
+                        </Link>
+                        <Link variant="body1" className={classes.headerOption} href='/womens'>
+                            Womens
+                        </Link>
+                        <Link variant="body1" className={classes.headerOption} href='/home'>
+                            Home
+                        </Link>
+                    </div>
+                    <IconButton
+                        aria-label="Basket"
+                        aria-controls="menu-appbar"
+                        aria-haspopup="true"
+                        href='/basket'
+                        className={classes.headerIcon}
+                    >
+                        <ShoppingBasket />
+                    </IconButton>
                     {signedIn && (
                         <div>
                             <IconButton
@@ -72,7 +88,6 @@ export default () => {
                                 onClose={handleClose}
                             >
                                 <MenuItem onClick={handleClose}>Profile</MenuItem>
-                                <MenuItem onClick={handleClose}>My account</MenuItem>
                                 <MenuItem onClick={authStore.logout}>Logout</MenuItem>
                             </Menu>
                         </div>

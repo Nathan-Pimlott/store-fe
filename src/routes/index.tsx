@@ -5,15 +5,17 @@ import {
     Route
 } from "react-router-dom";
 import { observer } from 'mobx-react-lite';
-import { Typography } from "@material-ui/core";
 
-import Auth from '../components/auth';
+import Login from '../components/auth/login';
+import Register from '../components/auth/register';
 import AuthStore from '../stores/auth';
-import Header from '../core/header';
+import Header from '../components/core/header';
+import Home from '../components/home';
+import Mens from '../components/mens';
+import Banner from '../components/core/banner';
 
 const Routes = () => {
     const authStore = React.useContext(AuthStore);
-    console.log('Auth Store: ', authStore);
 
     React.useEffect(() => {
         authStore.getIsLoggedIn();
@@ -23,21 +25,28 @@ const Routes = () => {
         return <div />
     }
 
+    if (!authStore.user?.email) {
+        return (
+        <Router>
+            <Switch>
+                <Route exact path="/register" component={Register} />
+                <Route path="/" component={Login} />
+            </Switch>
+            <Banner />
+        </Router>
+        )
+    }
+    
     return (
         <Router>
-            {
-                authStore.user?.email ?
-                    <Switch>
-                        <Header />
-                        <Route exact path="/home">
-                            <div>TEst page</div>
-                        </Route>
-                        <Route path="/">
-                            <Typography variant='h1'>You're Logged In!</Typography>
-                        </Route>
-                    </Switch> :
-                    <Auth />
-            }
+            <Header />
+            <Switch>
+                <Route exact path="/mens" component={Mens} />
+                {/* <Route exact path="/womens" component={<div>womens</div>} />
+                <Route exact path="/home" component={<div>home</div>} /> */}
+                <Route path="/" component={Home} />
+            </Switch>
+            <Banner />
         </Router>
     );
 }

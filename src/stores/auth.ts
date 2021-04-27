@@ -1,17 +1,11 @@
 import { createContext } from 'react';
 import { makeAutoObservable } from 'mobx';
 import { Cookies } from 'react-cookie';
-import axios from 'axios';
-import adapter from 'axios/lib/adapters/http';
+
+import { authenticate, createUser } from '../services/auth';
+import { IUser } from 'src/types';
 
 const cookies = new Cookies;
-
-interface IUser {
-    email?: string;
-    password?: string;
-    forename?: string;
-    surname?: string;
-};
 
 class AuthStore {
     user: IUser | null = null;
@@ -20,9 +14,18 @@ class AuthStore {
     // Used for rendering loading screen
     processing: boolean = false;
     error: string | null = null;
+    showBanner: boolean = false;
 
     constructor() {
         makeAutoObservable(this)
+    }
+
+    hideBanner = async () => {
+        try {
+            this.showBanner = false;
+        } catch (error) {
+            this.error = error;
+        }
     }
 
     getIsLoggedIn = async () => {
@@ -30,14 +33,13 @@ class AuthStore {
         try {
             const authCookie = cookies.get('user');
 
-            console.log('Auth Cookie: ', authCookie);
-
             if (authCookie) {
                 this.user = authCookie;
             }
 
             this.loading = false;
         } catch (error) {
+            this.error = error.message;
             this.loading = false;
         }
     }
@@ -45,38 +47,43 @@ class AuthStore {
     authenticate = async (email: string, password: string) => {
         try {
             this.processing = true;
+            this.error = null;
 
-            // console.log('About to call');
+            let user = await authenticate(
+                email, 
+                password
+            );
 
-            // let userRes = await axios.post(
-            //     `${process.env.STORE_API}/user/authenticate`,
-            //     {
-            //         email,
-            //         password
-            //     },
-            //     {
-            //         adapter
-            //     }
-            // );
-
-            // console.log('User Res: ', userRes);
-
-
-            const user = {
-                email,
-                forename: 'Nath',
-                surname: 'Pimlott'
+            if (!user.id) {               
+                this.error = 'Invalid email or password';
+            } else {
+                this.user = user;
             }
-            this.user = user;
-            cookies.set('user', JSON.stringify(user));
-
-            console.log('Set cookie');
-
 
             this.processing = false;
         } catch (error) {
             console.error(error.message)
-            this.error = error.message;
+            this.error = 'Invalid email or password';
+            this.processing = false;
+        }
+    }
+
+    register = async (user: IUser) => {
+        try {
+            this.processing = true;
+            this.error = null;
+
+            let userRes = await createUser(user);
+
+            if (!userRes.id) {
+                throw Error();
+            }
+
+            this.processing = false;
+        } catch (error) {
+            console.error(error.message)
+            this.error = 'Unable to create user';
+            this.processing = false;
         }
     }
 

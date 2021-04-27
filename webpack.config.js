@@ -47,6 +47,14 @@ module.exports = {
                 test: /\.(png|svg|jpg|jpeg|gif)$/i,
                 type: 'asset/resource',
             },
+            {
+                test: /\.s[ac]ss$/i,
+                use: [
+                    "style-loader",
+                    "css-loader",
+                    "sass-loader",
+                ],
+              }
 
         ],
     },
@@ -68,7 +76,7 @@ module.exports = {
     ],
     devServer: {
         historyApiFallback: true,
-        contentBase: path.resolve(__dirname, "dist"),
+        contentBase: path.resolve(__dirname, "src"),
         hot: true,
         port: 8080,
     },

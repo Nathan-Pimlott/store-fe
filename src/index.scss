@@ -1,0 +1,25 @@
+// Change the background color of the button on hover
+.auth-button:hover {
+    background-color: #72c0cc !important;
+    color: white;
+    font-weight: bold;
+}
+// Animate underline the link to register/login
+.auth-link {
+    display: inline-block;
+    color: grey;
+    text-decoration: none;
+}
+
+.auth-link::after {
+    content: '';
+    display: block;
+    width: 0;
+    height: 2px;
+    background: grey;
+    transition: width .3s;
+}
+
+.auth-link:hover::after {
+    width: 100%;
+}
