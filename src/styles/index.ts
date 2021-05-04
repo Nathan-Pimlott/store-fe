@@ -119,6 +119,13 @@ const classes = createUseStyles({
     },
     // PAGE
     //
+    // BASKET
+    basketTitle: {
+        margin: '50px !important',
+        fontWeight: '200 !important',
+    },
+    // BASKET
+    //
     errorMessage: {
         color: "red !important",
         fontSize: "12px !important",

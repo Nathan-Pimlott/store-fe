@@ -7,7 +7,7 @@ const getProducts = async (filters: IFilterProducts) => {
     try {
         // Call the api to get the product by the filtered values
         let productRes = await axios.post(
-            'http://localhost:3000/api/product/get',
+            '/api/product/get',
             filters
         );
         

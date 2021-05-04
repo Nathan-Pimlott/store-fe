@@ -2,7 +2,8 @@ import * as React from "react";
 import {
     BrowserRouter as Router,
     Switch,
-    Route
+    Route,
+    HashRouter
 } from "react-router-dom";
 import { observer } from 'mobx-react-lite';
 
@@ -11,6 +12,7 @@ import Register from '../components/auth/register';
 import AuthStore from '../stores/auth';
 import Header from '../components/core/header';
 import Home from '../components/home';
+import Basket from '../components/basket';
 import Mens from '../components/mens';
 import Banner from '../components/core/banner';
 
@@ -27,27 +29,29 @@ const Routes = () => {
 
     if (!authStore.user?.email) {
         return (
-        <Router>
-            <Switch>
-                <Route exact path="/register" component={Register} />
-                <Route path="/" component={Login} />
-            </Switch>
-            <Banner />
-        </Router>
+            <HashRouter>
+                <Switch>
+                    <Route exact path="/register" component={Register} />
+                    <Route path="/" component={Login} />
+                </Switch>
+                <Banner />
+            </HashRouter>
         )
     }
+
+    console.log('Is logged in: ', authStore.user);
+    
     
     return (
-        <Router>
+        <HashRouter>
             <Header />
             <Switch>
                 <Route exact path="/mens" component={Mens} />
-                {/* <Route exact path="/womens" component={<div>womens</div>} />
-                <Route exact path="/home" component={<div>home</div>} /> */}
+                <Route exact path="/basket" component={Basket} />
                 <Route path="/" component={Home} />
             </Switch>
             <Banner />
-        </Router>
+        </HashRouter>
     );
 }
 

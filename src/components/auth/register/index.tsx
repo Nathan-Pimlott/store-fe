@@ -144,7 +144,7 @@ export default function () {
 
                         <Link
                             variant="body2"
-                            href="/"
+                            href="/#/"
                             className={classnames(
                                 classes.registerLink,
                                 "auth-link"

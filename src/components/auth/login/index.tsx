@@ -110,7 +110,7 @@ const Login = () => {
 
                         <Link
                             variant="body2"
-                            href="/register"
+                            href="/#/register"
                             className={
                                 classnames(
                                     classes.registerLink,

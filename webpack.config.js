@@ -79,5 +79,10 @@ module.exports = {
         contentBase: path.resolve(__dirname, "src"),
         hot: true,
         port: 8080,
+        proxy: {
+                "*": "http://[::1]:3000",
+                "secure": false,
+                "changeOrigin": true
+        },
     },
 };

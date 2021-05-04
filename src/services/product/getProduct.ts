@@ -5,7 +5,7 @@ const getProduct = async (id: number) => {
     try {
         // Call the api to get the product by the id
         let productRes = await axios.post(
-            `http://localhost:3000/api/product/get/${id}`,
+            `/api/product/get/${id}`,
             {
                 id
             }

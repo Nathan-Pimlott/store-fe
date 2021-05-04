@@ -19,7 +19,7 @@ export const authenticate = async (
 ): Promise<IUser | null> => {
     try {
         let userRes: IAuthResponse = await axios.post(
-            `${process.env.STORE_API}/api/user/authenticate`,
+            '/api/user/authenticate',
             {
                 email,
                 password
@@ -54,7 +54,7 @@ export const createUser = async (
 ): Promise<IUser | null> => {
     try {
         let userRes: ICreateUserResponse = await axios.post(
-            `${process.env.STORE_API}/api/user/create`,
+            '/api/user/create',
             user,
             {
                 adapter
