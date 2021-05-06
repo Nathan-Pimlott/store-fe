@@ -1,14 +1,10 @@
 const path = require("path");
 const HtmlWebpackPlugin = require("html-webpack-plugin");
 const MiniCssExtractPlugin = require("mini-css-extract-plugin");
-const {
-    HotModuleReplacementPlugin
-} = require("webpack");
-const {
-    CleanWebpackPlugin
-} = require("clean-webpack-plugin");
-const webpack = require('webpack');
-const dotenv = require('dotenv');
+const { HotModuleReplacementPlugin } = require("webpack");
+const { CleanWebpackPlugin } = require("clean-webpack-plugin");
+const webpack = require("webpack");
+const dotenv = require("dotenv");
 
 dotenv.config();
 
@@ -21,7 +17,8 @@ module.exports = {
     },
     mode: "development",
     module: {
-        rules: [{
+        rules: [
+            {
                 test: /\.(js|jsx)$/,
                 exclude: /node_modules/,
                 use: {
@@ -33,11 +30,12 @@ module.exports = {
             },
             {
                 test: /\.tsx?$/,
-                loader: "ts-loader"
+                loader: "ts-loader",
             },
             {
                 test: /\.css$/i,
-                use: [{
+                use: [
+                    {
                         loader: MiniCssExtractPlugin.loader,
                     },
                     "css-loader",
@@ -45,21 +43,16 @@ module.exports = {
             },
             {
                 test: /\.(png|svg|jpg|jpeg|gif)$/i,
-                type: 'asset/resource',
+                type: "asset/resource",
             },
             {
                 test: /\.s[ac]ss$/i,
-                use: [
-                    "style-loader",
-                    "css-loader",
-                    "sass-loader",
-                ],
-              }
-
+                use: ["style-loader", "css-loader", "sass-loader"],
+            },
         ],
     },
     resolve: {
-        extensions: ['.ts', '.tsx', '.js', '.json']
+        extensions: [".ts", ".tsx", ".js", ".json"],
     },
     plugins: [
         new CleanWebpackPlugin(),
@@ -71,8 +64,8 @@ module.exports = {
             filename: "styles.[contentHash].css",
         }),
         new webpack.DefinePlugin({
-            'process.env': JSON.stringify(dotenv.config().parsed)
-        })
+            "process.env": JSON.stringify(dotenv.config().parsed),
+        }),
     ],
     devServer: {
         historyApiFallback: true,
@@ -80,9 +73,9 @@ module.exports = {
         hot: true,
         port: 8080,
         proxy: {
-                "*": "http://[::1]:3000",
-                "secure": false,
-                "changeOrigin": true
+            "*": "http://[::1]:3000",
+            secure: false,
+            changeOrigin: true,
         },
     },
 };

@@ -4,9 +4,15 @@ import {
     Toolbar,
     IconButton,
     Badge,
+    Typography,
+    Button,
+    InputBase,
+    TextField,
+    Input,
 } from "@material-ui/core";
 import {
     AccountCircle,
+    Search,
     ShoppingBasket,
 } from "@material-ui/icons";
 
@@ -17,7 +23,10 @@ import Classes from "../../styles";
 const Logo = require("../../assets/shenron.png");
 
 export default () => {
-    const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null);
+    const [
+        anchorEl,
+        setAnchorEl,
+    ] = React.useState<null | HTMLElement>(null);
     const authStore = React.useContext(AuthStore);
     const basketStore = React.useContext(BasketStore);
 
@@ -33,7 +42,35 @@ export default () => {
         <div className={classes.headerContainer}>
             <AppBar position="static">
                 <Toolbar>
-                    <img src={Logo} className={classes.headerIcon} />
+                    {/* <img src={Logo} className={classes.headerIcon} /> */}
+
+                    <Typography
+                        variant="h6"
+                        style={{ color: "white" }}
+                    >
+                        My Store
+                    </Typography>
+
+                    <Button className={classes.headerFirstButton}>
+                        Mens
+                    </Button>
+
+                    <Button className={classes.headerLastButton}>
+                        Womens
+                    </Button>
+
+                    <div className={classes.headerSearchContainer}>
+                        <Input
+                            className={classes.headerSearchField}
+                            placeholder="Search..."
+                        />
+                        <IconButton
+                            className={classes.headerSearchIcon}
+                            onClick={() => console.log("Hello world")}
+                        >
+                            <Search style={{ color: "black" }} />
+                        </IconButton>
+                    </div>
 
                     <IconButton
                         aria-label="Basket"
@@ -43,16 +80,16 @@ export default () => {
                         className={classes.headerIcon}
                     >
                         <Badge
-                            badgeContent={basketStore.basket?.length || 0}
+                            badgeContent={
+                                basketStore.basket?.length || 0
+                            }
                             color="secondary"
                         >
                             <ShoppingBasket />
                         </Badge>
                     </IconButton>
 
-                    <IconButton
-                        color="inherit"
-                    >
+                    <IconButton color="inherit">
                         <AccountCircle />
                     </IconButton>
                 </Toolbar>

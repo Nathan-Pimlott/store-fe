@@ -35,7 +35,7 @@ const classes = createUseStyles({
         width: 100,
         height: "auto",
         margin: "0 auto",
-        borderRadius: 50
+        borderRadius: 50,
     },
     authButton: {
         backgroundColor: "white !important",
@@ -48,7 +48,7 @@ const classes = createUseStyles({
         color: "grey !important",
         textDecoration: "none !important",
         textAlign: "center !important",
-        margin: 'auto !important'
+        margin: "auto !important",
     },
     registerTitle: {
         textAlign: "center",
@@ -88,6 +88,48 @@ const classes = createUseStyles({
         marginRight: 20,
         color: "white !important",
     },
+    headerFirstButton: {
+        color: "white !important",
+        backgroundColor: "none !important",
+        borderLeft: "1px solid white !important",
+        borderRight: "1px solid white !important",
+        borderRadius: "0 !important",
+        marginLeft: "20px !important",
+    },
+    headerLastButton: {
+        color: "white !important",
+        backgroundColor: "none !important",
+        borderRight: "1px solid white !important",
+        borderRadius: "0 !important",
+        marginRight: "20px !important",
+    },
+    headerSearchContainer: {
+        flex: 1,
+        display: "flex !important",
+        flexDirection: "row !important",
+        backgroundColor: "white !important",
+        borderRadius: "50px !important",
+        margin: "0px 20px !important",
+        height: "45px !important",
+        padding: "0 20px !important",
+    },
+    headerSearchField: {
+        flex: "1 !important",
+        color: "black !important",
+        border: "none !important",
+        "&:before": {
+            border: "none !important",
+        },
+        "&:after": {
+            border: "none !important",
+        },
+        "&:hover": {
+            border: "none !important",
+        },
+    },
+    headerSearchIcon: {
+        color: "black !important",
+    },
     // HEADER
     //
     // PRODUCT
@@ -121,8 +163,8 @@ const classes = createUseStyles({
     //
     // BASKET
     basketTitle: {
-        margin: '50px !important',
-        fontWeight: '200 !important',
+        margin: "50px !important",
+        fontWeight: "200 !important",
     },
     // BASKET
     //
@@ -132,8 +174,8 @@ const classes = createUseStyles({
         fontWeight: "bold !important",
     },
     fieldLabel: {
-        fontSize: '14px !important',
-        color: 'grey !important'
+        fontSize: "14px !important",
+        color: "grey !important",
     },
 });
 

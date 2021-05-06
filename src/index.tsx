@@ -1,19 +1,19 @@
 import * as React from "react";
 import * as ReactDOM from "react-dom";
 import Routes from "./routes";
-import './index.scss';
+import "./index.scss";
 import { ThemeProvider } from "@material-ui/styles";
 import { createMuiTheme } from "@material-ui/core";
 
 const theme = createMuiTheme({
     palette: {
         primary: {
-          main: '#2ea5f0',
+            main: "#262626",
         },
         secondary: {
-          main: '#11cb5f',
+            main: "#96bd2b",
         },
-      },
+    },
 });
 
 ReactDOM.render(
