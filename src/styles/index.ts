@@ -11,6 +11,9 @@ const classes = createUseStyles({
     largeMarginTop: {
         marginTop: 20,
     },
+    border: {
+        borderTop: "1px solid lightgrey !important;",
+    },
     // AUTH
     authOuterContainer: {
         width: "-webkit-fill-available",
@@ -94,6 +97,7 @@ const classes = createUseStyles({
         borderLeft: "1px solid white !important",
         borderRight: "1px solid white !important",
         borderRadius: "0 !important",
+        padding: "6px 15px !important",
         marginLeft: "20px !important",
     },
     headerLastButton: {
@@ -101,6 +105,7 @@ const classes = createUseStyles({
         backgroundColor: "none !important",
         borderRight: "1px solid white !important",
         borderRadius: "0 !important",
+        padding: "6px 15px !important",
         marginRight: "20px !important",
     },
     headerSearchContainer: {
@@ -143,6 +148,14 @@ const classes = createUseStyles({
         gridGap: "1px",
         gridTemplateColumns: "repeat(3, 1fr)",
     },
+    productContainer: {
+        display: "flex",
+        flexDirection: "row",
+        padding: "20px 50px",
+    },
+    productBorder: {
+        borderTop: "1px solid lightgrey !important",
+    },
     productTileInnerContainer: {
         textAlign: "center !important",
         padding: 10,
@@ -162,9 +175,40 @@ const classes = createUseStyles({
     // PAGE
     //
     // BASKET
-    basketTitle: {
-        margin: "50px !important",
+    basketSubTitle: {
+        fontWeight: "700 !important",
+        textAlign: "center",
+    },
+    basketTitleContainer: {
         fontWeight: "200 !important",
+        padding: 50,
+    },
+    basketTotalContainer: {
+        padding: 20,
+    },
+    basketProductImage: {
+        height: 100,
+        width: "auto",
+    },
+    basketProductDetails: {
+        flex: 1,
+        display: "flex",
+        flexDirection: "column",
+        marginLeft: 20,
+    },
+    basketProductTitle: {
+        fontWeight: "bold",
+        flex: 1,
+    },
+    basketRemoveProductContainer: {
+        marginLeft: 20,
+        display: "flex",
+    },
+    basketRemoveProductButton: {
+        margin: "auto !important",
+    },
+    basketRemoveProductIcon: {
+        color: "red",
     },
     // BASKET
     //

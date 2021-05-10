@@ -1,39 +1,43 @@
-import { Typography } from "@material-ui/core";
+import { IconButton, Typography } from "@material-ui/core";
+import { Delete } from "@material-ui/icons";
 import * as React from "react";
+import classnames from "classnames";
 
 import { IProduct } from "../../types";
+import Classes from "../../styles";
+import BasketStore from "../../stores/basket";
 
 interface IProps {
     product: IProduct;
+    idx: number;
 }
 
-const InlineProduct = ({ product }: IProps) => {
+const InlineProduct = ({ product, idx }: IProps) => {
+    const classes = Classes();
+
+    const basketStore = React.useContext(BasketStore);
+
+    function removeProduct() {
+        basketStore.removeFromBasket(product.id);
+    }
+
     return (
         <div
-            style={{
-                display: "flex",
-                flexDirection: "row",
-                borderTop: "1px solid lightgrey",
-                padding: 20,
-            }}
+            className={classnames(
+                classes.productContainer,
+                idx > 0 && classes.productBorder
+            )}
         >
             <div>
                 <img
                     src={product.img}
                     alt="Product image"
-                    style={{ height: 100, width: "auto" }}
+                    className={classes.basketProductImage}
                 />
             </div>
-            <div
-                style={{
-                    flex: 1,
-                    display: "flex",
-                    flexDirection: "column",
-                    marginLeft: 20,
-                }}
-            >
+            <div className={classes.basketProductDetails}>
                 <Typography
-                    style={{ fontWeight: "bold", flex: 1 }}
+                    className={classes.basketProductTitle}
                     variant="h6"
                 >
                     {product.name}
@@ -41,8 +45,16 @@ const InlineProduct = ({ product }: IProps) => {
                 <Typography>{product.description}</Typography>
                 <Typography>{product.price}</Typography>
             </div>
-            <div style={{ marginLeft: 20 }}>
-                <Typography>Add a remove and quantity button :)</Typography>
+            <div className={classes.basketRemoveProductContainer}>
+                <IconButton
+                    aria-label="delete"
+                    className={classes.basketRemoveProductButton}
+                    onClick={removeProduct}
+                >
+                    <Delete
+                        className={classes.basketRemoveProductIcon}
+                    />
+                </IconButton>
             </div>
         </div>
     );

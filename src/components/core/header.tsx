@@ -19,24 +19,35 @@ import {
 import AuthStore from "../../stores/auth";
 import BasketStore from "../../stores/basket";
 import Classes from "../../styles";
+import { withRouter } from "react-router";
 
 const Logo = require("../../assets/shenron.png");
 
-export default () => {
-    const [
-        anchorEl,
-        setAnchorEl,
-    ] = React.useState<null | HTMLElement>(null);
+interface IProps {
+    history: any;
+}
+
+export default withRouter(({ history }: IProps) => {
     const authStore = React.useContext(AuthStore);
     const basketStore = React.useContext(BasketStore);
+
+    const [state, setState] = React.useState({
+        searchField: "",
+    });
 
     useEffect(() => {
         basketStore.getBasket();
     }, []);
 
-    const classes = Classes();
+    async function search() {
+        try {
+            history.push(`/search/${state.searchField}`);
+        } catch (error) {
+            throw Error(error);
+        }
+    }
 
-    console.log("Basket Store: ", basketStore.basket);
+    const classes = Classes();
 
     return (
         <div className={classes.headerContainer}>
@@ -51,11 +62,17 @@ export default () => {
                         My Store
                     </Typography>
 
-                    <Button className={classes.headerFirstButton}>
+                    <Button
+                        className={classes.headerFirstButton}
+                        href="/#/mens"
+                    >
                         Mens
                     </Button>
 
-                    <Button className={classes.headerLastButton}>
+                    <Button
+                        className={classes.headerLastButton}
+                        href="/#/womens"
+                    >
                         Womens
                     </Button>
 
@@ -63,10 +80,18 @@ export default () => {
                         <Input
                             className={classes.headerSearchField}
                             placeholder="Search..."
+                            value={state.searchField}
+                            onChange={(e) =>
+                                setState({
+                                    ...state,
+                                    searchField: e.target.value,
+                                })
+                            }
                         />
                         <IconButton
                             className={classes.headerSearchIcon}
-                            onClick={() => console.log("Hello world")}
+                            onClick={search}
+                            disabled={!state.searchField}
                         >
                             <Search style={{ color: "black" }} />
                         </IconButton>
@@ -89,11 +114,14 @@ export default () => {
                         </Badge>
                     </IconButton>
 
-                    <IconButton color="inherit">
+                    <IconButton
+                        color="inherit"
+                        onClick={authStore.logout}
+                    >
                         <AccountCircle />
                     </IconButton>
                 </Toolbar>
             </AppBar>
         </div>
     );
-};
+});

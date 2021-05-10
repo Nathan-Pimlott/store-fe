@@ -4,7 +4,7 @@ export interface ILoginProps {
 }
 
 export interface IRegisterProps {
-    email: string; 
+    email: string;
     password: string;
     confirmPassword: string;
     forename: string;
@@ -20,17 +20,18 @@ export interface IUser {
 }
 
 export interface IProduct {
+    id?: string;
     name: string;
     description: string;
     img: string;
-    gender: 'mens' | 'womens';
+    gender: "mens" | "womens";
     price: number;
     color: string;
 }
 
 export interface IFilterProducts {
     name?: string;
-    gender?: 'mens' | 'womens';
+    gender?: "mens" | "womens";
     priceMin?: number;
     priceMax?: number;
     color?: string;
