@@ -5,7 +5,8 @@ import { Cookies } from "react-cookie";
 import { authenticate, createUser } from "../services/auth";
 import { IUser } from "src/types";
 
-const cookies = new Cookies();
+// prettier-ignore
+const cookies = new Cookies;
 
 class AuthStore {
     user: IUser | null = null;
@@ -15,6 +16,7 @@ class AuthStore {
     processing: boolean = false;
     error: string | null = null;
     showBanner: boolean = false;
+    bannerMessage: string = "";
 
     constructor() {
         makeAutoObservable(this);
@@ -23,7 +25,9 @@ class AuthStore {
     hideBanner = async () => {
         try {
             this.showBanner = false;
+            this.bannerMessage = "";
         } catch (error) {
+            console.error(error);
             this.error = error;
         }
     };
@@ -55,6 +59,8 @@ class AuthStore {
                 this.error = "Invalid email or password";
             } else {
                 this.user = user;
+                this.showBanner = true;
+                this.bannerMessage = "Successfully logged in!";
             }
 
             this.processing = false;

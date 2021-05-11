@@ -4,37 +4,27 @@ import { Cookies } from "react-cookie";
 
 import { IProduct } from "src/types";
 
-const cookies = new Cookies();
+// prettier-ignore
+const cookies = new Cookies;
 
 class BasketStore {
-    basket: IProduct[] | null = null;
     loading: boolean = false;
     error: string | null = null;
+    showBanner: boolean = false;
+    bannerMessage: string = "";
+    basket: IProduct[] | null = null;
 
     constructor() {
         makeAutoObservable(this);
     }
 
-    addToBasket = async (item: IProduct) => {
+    hideBanner = async () => {
         try {
-            this.loading = true;
-            console.log("Here");
-
-            let basketItems =
-                (await cookies.get("basket_items")) || [];
-            console.log("basket items: ", basketItems);
-            await basketItems.push(item);
-            cookies.set("basket_items", basketItems);
-            console.log("Setting: ", basketItems);
-
-            this.basket = basketItems;
-
-            this.loading = false;
+            this.showBanner = false;
+            this.bannerMessage = "";
         } catch (error) {
-            console.log("error");
             console.error(error);
             this.error = error;
-            this.loading = false;
         }
     };
 
@@ -42,7 +32,34 @@ class BasketStore {
         try {
             this.loading = true;
 
-            this.basket = await cookies.get("basket_items");
+            const basketItems = await cookies.get("basket_items");
+
+            console.log("Basket Items: ", basketItems);
+
+            this.basket = basketItems;
+
+            this.loading = false;
+        } catch (error) {
+            console.error(error);
+            this.error = error;
+            this.loading = false;
+        }
+    };
+
+    addToBasket = async (item: IProduct) => {
+        try {
+            this.loading = true;
+
+            let basketItems =
+                (await cookies.get("basket_items")) || [];
+
+            await basketItems.push(item);
+
+            cookies.set("basket_items", JSON.stringify(basketItems));
+            this.basket = basketItems;
+
+            this.showBanner = true;
+            this.bannerMessage = "Added to basket.";
 
             this.loading = false;
         } catch (error) {
@@ -58,15 +75,18 @@ class BasketStore {
 
             this.loading = true;
 
-            let basketItems =
+            let basketItems: IProduct[] =
                 (await cookies.get("basket_items")) || [];
 
-            const newBasketItems = basketItems.map(
+            const newBasketItems = basketItems.filter(
                 (item) => item.id !== id
             );
 
             cookies.set("basket_items", newBasketItems);
             this.basket = newBasketItems;
+
+            this.showBanner = true;
+            this.bannerMessage = "Removed from basket.";
 
             this.loading = false;
         } catch (error) {
