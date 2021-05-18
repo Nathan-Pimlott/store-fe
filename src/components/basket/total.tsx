@@ -15,7 +15,7 @@ function BasketTotal({ basket }: IProps) {
     const classes = Classes();
 
     const basketTotal: number =
-        basket?.reduce((a, b) => a + b.price, 0) || 0;
+        basket?.reduce((a, b) => a + b.quantity * b.price, 0) || 0;
 
     const shipping: number = 3.99;
 
@@ -24,10 +24,7 @@ function BasketTotal({ basket }: IProps) {
     return (
         <div style={{ backgroundColor: "white" }}>
             <div className={classes.basketTotalContainer}>
-                <Typography
-                    variant="h6"
-                    className={classes.basketSubTitle}
-                >
+                <Typography variant="h6" className={classes.basketSubTitle}>
                     Total
                 </Typography>
                 <div
@@ -36,14 +33,10 @@ function BasketTotal({ basket }: IProps) {
                         flex: 1,
                     }}
                 >
-                    <Typography
-                        style={{ flex: 1, fontWeight: "bold" }}
-                    >
+                    <Typography style={{ flex: 1, fontWeight: "bold" }}>
                         Sub total
                     </Typography>
-                    <Typography
-                        style={{ flex: 1, textAlign: "right" }}
-                    >
+                    <Typography style={{ flex: 1, textAlign: "right" }}>
                         {convertToCurrency(basketTotal)}
                     </Typography>
                 </div>
@@ -54,14 +47,10 @@ function BasketTotal({ basket }: IProps) {
                         marginTop: 10,
                     }}
                 >
-                    <Typography
-                        style={{ flex: 1, fontWeight: "bold" }}
-                    >
+                    <Typography style={{ flex: 1, fontWeight: "bold" }}>
                         Shipping
                     </Typography>
-                    <Typography
-                        style={{ flex: 1, textAlign: "right" }}
-                    >
+                    <Typography style={{ flex: 1, textAlign: "right" }}>
                         {convertToCurrency(shipping)}
                     </Typography>
                 </div>
@@ -72,14 +61,10 @@ function BasketTotal({ basket }: IProps) {
                         marginTop: 10,
                     }}
                 >
-                    <Typography
-                        style={{ flex: 1, fontWeight: "bold" }}
-                    >
+                    <Typography style={{ flex: 1, fontWeight: "bold" }}>
                         Total
                     </Typography>
-                    <Typography
-                        style={{ flex: 1, textAlign: "right" }}
-                    >
+                    <Typography style={{ flex: 1, textAlign: "right" }}>
                         {convertToCurrency(total)}
                     </Typography>
                 </div>

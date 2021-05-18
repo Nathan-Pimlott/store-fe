@@ -1,5 +1,6 @@
 import { Typography } from "@material-ui/core";
 import * as React from "react";
+import * as _ from "lodash";
 import { IProduct } from "../../types";
 
 import InlineProduct from "../lib/inlineProduct";
@@ -11,7 +12,7 @@ interface IProps {
 function BasketProducts({ basket }: IProps) {
     return (
         <React.Fragment>
-            {basket ? (
+            {basket?.length > 0 ? (
                 <div style={{ backgroundColor: "white" }}>
                     {basket?.map((basketItem, idx) => (
                         <InlineProduct

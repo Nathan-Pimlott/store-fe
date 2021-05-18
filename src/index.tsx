@@ -20,6 +20,9 @@ const theme = createMuiTheme({
             main: "#96bd2b",
         },
     },
+    typography: {
+        fontFamily: "KoHo",
+    },
 });
 
 const BannerWrapper = observer(() => {

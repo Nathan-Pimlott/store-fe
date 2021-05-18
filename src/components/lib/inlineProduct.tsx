@@ -1,4 +1,11 @@
-import { IconButton, Typography } from "@material-ui/core";
+import {
+    Button,
+    ButtonGroup,
+    IconButton,
+    InputAdornment,
+    TextField,
+    Typography,
+} from "@material-ui/core";
 import { Delete } from "@material-ui/icons";
 import * as React from "react";
 import classnames from "classnames";
@@ -6,6 +13,8 @@ import classnames from "classnames";
 import { IProduct } from "../../types";
 import Classes from "../../styles";
 import BasketStore from "../../stores/basket";
+import { convertToCurrency } from "../../utils";
+import { Quantity } from "./";
 
 interface IProps {
     product: IProduct;
@@ -19,6 +28,10 @@ const InlineProduct = ({ product, idx }: IProps) => {
 
     function removeProduct() {
         basketStore.removeFromBasket(product.id);
+    }
+
+    function updateQuantity(value: number) {
+        basketStore.updateQuantity(product.id, value);
     }
 
     return (
@@ -36,24 +49,24 @@ const InlineProduct = ({ product, idx }: IProps) => {
                 />
             </div>
             <div className={classes.basketProductDetails}>
-                <Typography
-                    className={classes.basketProductTitle}
-                    variant="h6"
-                >
+                <Typography className={classes.basketProductTitle} variant="h6">
                     {product.name}
                 </Typography>
                 <Typography>{product.description}</Typography>
-                <Typography>{product.price}</Typography>
+                <Typography>{convertToCurrency(product.price)}</Typography>
             </div>
             <div className={classes.basketRemoveProductContainer}>
+                <Quantity
+                    classes={classes}
+                    value={product.quantity}
+                    onChange={updateQuantity}
+                />
                 <IconButton
                     aria-label="delete"
                     className={classes.basketRemoveProductButton}
                     onClick={removeProduct}
                 >
-                    <Delete
-                        className={classes.basketRemoveProductIcon}
-                    />
+                    <Delete className={classes.basketRemoveProductIcon} />
                 </IconButton>
             </div>
         </div>

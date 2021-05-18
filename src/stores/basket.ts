@@ -2,7 +2,12 @@ import { createContext } from "react";
 import { makeAutoObservable } from "mobx";
 import { Cookies } from "react-cookie";
 
-import { IProduct } from "src/types";
+import { IProduct } from "../types";
+import {
+    addToBasket,
+    removeFromBasket,
+    updateQuantity,
+} from "../services/basket";
 
 // prettier-ignore
 const cookies = new Cookies;
@@ -50,16 +55,14 @@ class BasketStore {
         try {
             this.loading = true;
 
-            let basketItems =
-                (await cookies.get("basket_items")) || [];
+            console.log("Item: ", item);
 
-            await basketItems.push(item);
+            let basketItems = await addToBasket(item);
 
-            cookies.set("basket_items", JSON.stringify(basketItems));
             this.basket = basketItems;
 
             this.showBanner = true;
-            this.bannerMessage = "Added to basket.";
+            this.bannerMessage = `${item.name} added to basket.`;
 
             this.loading = false;
         } catch (error) {
@@ -71,19 +74,31 @@ class BasketStore {
 
     removeFromBasket = async (id: string) => {
         try {
-            console.log("ID: ", id);
-
             this.loading = true;
 
-            let basketItems: IProduct[] =
-                (await cookies.get("basket_items")) || [];
+            const newBasketItems = await removeFromBasket(id);
 
-            const newBasketItems = basketItems.filter(
-                (item) => item.id !== id
-            );
-
-            cookies.set("basket_items", newBasketItems);
             this.basket = newBasketItems;
+
+            this.showBanner = true;
+            this.bannerMessage = "Removed from basket.";
+
+            this.loading = false;
+        } catch (error) {
+            console.log("error");
+            console.error(error);
+            this.error = error;
+            this.loading = false;
+        }
+    };
+
+    updateQuantity = async (id: string, quantity: number) => {
+        try {
+            this.loading = true;
+
+            const updatedBasketItems = await updateQuantity(id, quantity);
+
+            this.basket = updatedBasketItems;
 
             this.showBanner = true;
             this.bannerMessage = "Removed from basket.";

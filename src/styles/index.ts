@@ -203,6 +203,7 @@ const classes = createUseStyles({
     basketRemoveProductContainer: {
         marginLeft: 20,
         display: "flex",
+        flexDirection: "column",
     },
     basketRemoveProductButton: {
         margin: "auto !important",

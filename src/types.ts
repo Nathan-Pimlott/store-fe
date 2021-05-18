@@ -27,6 +27,7 @@ export interface IProduct {
     gender: "mens" | "womens";
     price: number;
     color: string;
+    quantity?: number;
 }
 
 export interface IFilterProducts {

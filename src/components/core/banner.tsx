@@ -19,7 +19,7 @@ function Banner({ open, onClose, message }: IProps) {
                 horizontal: "center",
             }}
             open={open}
-            autoHideDuration={5000}
+            autoHideDuration={2500}
             onClose={onClose}
             message={message}
             action={
