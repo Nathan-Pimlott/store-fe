@@ -1,10 +1,5 @@
 import * as React from "react";
-import {
-    Button,
-    InputLabel,
-    Typography,
-    Link,
-} from "@material-ui/core";
+import { Button, InputLabel, Typography, Link } from "@material-ui/core";
 import { Formik } from "formik";
 import classnames from "classnames";
 
@@ -26,8 +21,8 @@ export default function () {
     });
 
     const register = async (values: IRegisterProps) => {
-        console.log('Values: ', values);
-        
+        console.log("Values: ", values);
+
         return await authStore.register(values);
     };
 
@@ -99,7 +94,8 @@ export default function () {
                             toggleShowPassword={() => {
                                 setState({
                                     ...state,
-                                    showConfirmPassword: !state.showConfirmPassword,
+                                    showConfirmPassword:
+                                        !state.showConfirmPassword,
                                 });
                             }}
                             confirm={true}
@@ -130,12 +126,7 @@ export default function () {
                             disabled={isSubmitting}
                             fullWidth
                             variant="contained"
-                            className={
-                                classnames(
-                                    'auth-button',
-                                    classes.authButton
-                                )
-                            }
+                            color="secondary"
                         >
                             Register
                         </Button>

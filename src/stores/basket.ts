@@ -94,6 +94,11 @@ class BasketStore {
 
     updateQuantity = async (id: string, quantity: number) => {
         try {
+            console.log("Quantity: ", quantity);
+
+            if (quantity === 0) {
+                return this.removeFromBasket(id);
+            }
             this.loading = true;
 
             const updatedBasketItems = await updateQuantity(id, quantity);
@@ -101,7 +106,7 @@ class BasketStore {
             this.basket = updatedBasketItems;
 
             this.showBanner = true;
-            this.bannerMessage = "Removed from basket.";
+            this.bannerMessage = "Quantity updated.";
 
             this.loading = false;
         } catch (error) {

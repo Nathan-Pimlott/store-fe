@@ -151,7 +151,7 @@ const classes = createUseStyles({
     productContainer: {
         display: "flex",
         flexDirection: "row",
-        padding: "20px 50px",
+        padding: "20px",
     },
     productBorder: {
         borderTop: "1px solid lightgrey !important",

@@ -1,20 +1,14 @@
-import {
-    Button,
-    ButtonGroup,
-    IconButton,
-    InputAdornment,
-    TextField,
-    Typography,
-} from "@material-ui/core";
+import { IconButton, MenuItem, Select, Typography } from "@material-ui/core";
 import { Delete } from "@material-ui/icons";
 import * as React from "react";
 import classnames from "classnames";
+import { times } from "lodash";
 
 import { IProduct } from "../../types";
 import Classes from "../../styles";
 import BasketStore from "../../stores/basket";
 import { convertToCurrency } from "../../utils";
-import { Quantity } from "./";
+import { Quantity } from ".";
 
 interface IProps {
     product: IProduct;
@@ -53,14 +47,18 @@ const InlineProduct = ({ product, idx }: IProps) => {
                     {product.name}
                 </Typography>
                 <Typography>{product.description}</Typography>
-                <Typography>{convertToCurrency(product.price)}</Typography>
+                <div style={{ display: "flex" }}>
+                    <Typography style={{ margin: "auto 0" }}>
+                        {convertToCurrency(product.price)}
+                    </Typography>
+                    <Quantity
+                        classes={classes}
+                        value={product.quantity}
+                        onChange={updateQuantity}
+                    />
+                </div>
             </div>
             <div className={classes.basketRemoveProductContainer}>
-                <Quantity
-                    classes={classes}
-                    value={product.quantity}
-                    onChange={updateQuantity}
-                />
                 <IconButton
                     aria-label="delete"
                     className={classes.basketRemoveProductButton}

@@ -1,5 +1,6 @@
 import * as React from "react";
-import { Button, ButtonGroup, Typography } from "@material-ui/core";
+import { Select, MenuItem, Typography } from "@material-ui/core";
+import { times } from "lodash";
 
 interface IProps {
     classes: any;
@@ -7,29 +8,17 @@ interface IProps {
     value: number;
 }
 
-export const Quantity = (props: IProps) => {
-    return (
-        <div style={{ display: "flex", flexDirection: "row" }}>
-            <ButtonGroup size="large" color="primary">
-                <Button onClick={() => props.onChange(props.value - 1)}>
-                    -
-                </Button>
-                <div
-                    style={{
-                        border: "1px solid #909090",
-                        borderRight: "none",
-                        display: "flex",
-                        cursor: "default",
-                    }}
-                >
-                    <Typography style={{ margin: "auto" }}>
-                        {props.value}
-                    </Typography>
-                </div>
-                <Button onClick={() => props.onChange(props.value + 1)}>
-                    +
-                </Button>
-            </ButtonGroup>
-        </div>
-    );
-};
+export const Quantity = (props: IProps) => (
+    <div style={{ display: "flex", marginLeft: 30 }}>
+        <Typography style={{ margin: "auto 0" }}>Qty</Typography>
+        <Select
+            value={props.value}
+            onChange={(e: any) => props.onChange(e.target.value)}
+            style={{ marginLeft: 10 }}
+        >
+            {times(10, (i: number) => (
+                <MenuItem value={i + 1}>{i + 1}</MenuItem>
+            ))}
+        </Select>
+    </div>
+);

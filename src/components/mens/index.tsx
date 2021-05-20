@@ -1,46 +1,39 @@
-import { observer } from 'mobx-react-lite';
-import * as React from 'react';
-import { Typography } from '@material-ui/core';
+import { observer } from "mobx-react-lite";
+import * as React from "react";
 
-import ProductStore from '../../stores/product';
-import Classes from '../../styles';
-import Loading from '../core/loading';
-import ProductTile from '../product/tile';
-import { IProduct } from '../../types';
+import ProductStore from "../../stores/product";
+import Classes from "../../styles";
+import Loading from "../core/loading";
+import ProductTile from "../product/tile";
+import { IProduct } from "../../types";
+import Header from "./header";
 
-const Header = () => {
+const MensIndex = () => {
     const productStore = React.useContext(ProductStore);
 
     const classes = Classes();
 
     React.useEffect(() => {
         productStore.getProducts({
-            gender: 'mens'
-        })
+            gender: "mens",
+        });
     }, []);
 
     if (productStore.loading) {
-        return <Loading />
+        return <Loading />;
     }
     return (
         <div>
-            <Typography className={classes.pageTitle} variant='h2'>
-                Mens Clothing
-            </Typography>
+            <Header />
             <div className={classes.productTileOuterContainer}>
                 {productStore.products?.map((product: IProduct) => (
                     <div className={classes.productTileInnerContainer}>
-                        <ProductTile
-                            product={product}
-                            classes={classes}
-                        />
+                        <ProductTile product={product} classes={classes} />
                     </div>
                 ))}
             </div>
         </div>
-    )
-}
+    );
+};
 
-export default observer(
-    Header
-);
+export default observer(MensIndex);

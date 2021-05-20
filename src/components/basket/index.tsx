@@ -20,7 +20,7 @@ export default observer(() => {
     return (
         <React.Fragment>
             <BasketHeader />
-            {/* <button
+            <button
                 onClick={() => {
                     basketStore.addToBasket({
                         id: "home_shirt_1",
@@ -49,7 +49,7 @@ export default observer(() => {
                 }}
             >
                 Away
-            </button> */}
+            </button>
 
             <Grid container>
                 <Grid item sm={12} md={8} style={{ padding: 20 }}>

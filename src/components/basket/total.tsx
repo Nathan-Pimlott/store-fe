@@ -14,8 +14,9 @@ const paymentTypes: string[] = ["visa", "paypal", "amex"];
 function BasketTotal({ basket }: IProps) {
     const classes = Classes();
 
-    const basketTotal: number =
-        basket?.reduce((a, b) => a + b.quantity * b.price, 0) || 0;
+    const basketTotal: number = basket
+        ? basket?.reduce((a, b) => a + b.quantity * b.price, 0)
+        : 0;
 
     const shipping: number = 3.99;
 
@@ -93,8 +94,8 @@ function BasketTotal({ basket }: IProps) {
                         marginTop: 10,
                     }}
                 >
-                    {paymentTypes.map((paymentType) => (
-                        <div style={{ flex: 1, display: "flex" }}>
+                    {paymentTypes.map((paymentType, idx) => (
+                        <div key={idx} style={{ flex: 1, display: "flex" }}>
                             <img
                                 src={require(`../../assets/payment/${paymentType}.jpeg`)}
                                 alt={paymentType}

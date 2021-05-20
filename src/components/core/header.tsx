@@ -10,16 +10,13 @@ import {
     TextField,
     Input,
 } from "@material-ui/core";
-import {
-    AccountCircle,
-    Search,
-    ShoppingBasket,
-} from "@material-ui/icons";
+import { AccountCircle, Search, ShoppingBasket } from "@material-ui/icons";
 
 import AuthStore from "../../stores/auth";
 import BasketStore from "../../stores/basket";
 import Classes from "../../styles";
 import { withRouter } from "react-router";
+import { observer } from "mobx-react-lite";
 
 const Logo = require("../../assets/shenron.png");
 
@@ -27,9 +24,11 @@ interface IProps {
     history: any;
 }
 
-export default withRouter(({ history }: IProps) => {
+const Header = ({ history }: IProps) => {
     const authStore = React.useContext(AuthStore);
     const basketStore = React.useContext(BasketStore);
+
+    const classes = Classes();
 
     const [state, setState] = React.useState({
         searchField: "",
@@ -47,7 +46,14 @@ export default withRouter(({ history }: IProps) => {
         }
     }
 
-    const classes = Classes();
+    const basketCount =
+        basketStore.basket?.length > 0
+            ? basketStore.basket
+                  ?.map((item) => item.quantity)
+                  .reduce((current, next) => current + next)
+            : 0;
+
+    console.log("Basket Count: ", basketCount);
 
     return (
         <div className={classes.headerContainer}>
@@ -55,10 +61,7 @@ export default withRouter(({ history }: IProps) => {
                 <Toolbar>
                     {/* <img src={Logo} className={classes.headerIcon} /> */}
 
-                    <Typography
-                        variant="h6"
-                        style={{ color: "white" }}
-                    >
+                    <Typography variant="h6" style={{ color: "white" }}>
                         My Store
                     </Typography>
 
@@ -104,24 +107,18 @@ export default withRouter(({ history }: IProps) => {
                         href="/#/basket"
                         className={classes.headerIcon}
                     >
-                        <Badge
-                            badgeContent={
-                                basketStore.basket?.length || 0
-                            }
-                            color="secondary"
-                        >
+                        <Badge badgeContent={basketCount} color="secondary">
                             <ShoppingBasket />
                         </Badge>
                     </IconButton>
 
-                    <IconButton
-                        color="inherit"
-                        onClick={authStore.logout}
-                    >
+                    <IconButton color="inherit" onClick={authStore.logout}>
                         <AccountCircle />
                     </IconButton>
                 </Toolbar>
             </AppBar>
         </div>
     );
-});
+};
+
+export default withRouter(observer(Header));

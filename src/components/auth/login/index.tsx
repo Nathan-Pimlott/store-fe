@@ -1,10 +1,5 @@
 import * as React from "react";
-import {
-    Button,
-    Typography,
-    Link,
-    LinearProgress,
-} from "@material-ui/core";
+import { Button, Typography, Link, LinearProgress } from "@material-ui/core";
 import { Formik } from "formik";
 import classnames from "classnames";
 
@@ -96,12 +91,7 @@ const Login = () => {
                             disabled={isSubmitting}
                             fullWidth
                             variant="contained"
-                            className={
-                                classnames(
-                                    'auth-button',
-                                    classes.authButton
-                                )
-                            }
+                            color="secondary"
                         >
                             Login
                         </Button>
@@ -111,12 +101,10 @@ const Login = () => {
                         <Link
                             variant="body2"
                             href="/#/register"
-                            className={
-                                classnames(
-                                    classes.registerLink,
-                                    'auth-link'
-                                )
-                            }
+                            className={classnames(
+                                classes.registerLink,
+                                "auth-link"
+                            )}
                         >
                             Need an account? Register here
                         </Link>
