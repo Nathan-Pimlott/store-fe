@@ -4,9 +4,10 @@ import * as React from "react";
 import ProductStore from "../../stores/product";
 import Classes from "../../styles";
 import Loading from "../core/loading";
-import ProductTile from "../product/tile";
+import ProductTile from "../lib/productTile";
 import { IProduct } from "../../types";
 import Header from "./header";
+import { Button } from "@material-ui/core";
 
 const MensIndex = () => {
     const productStore = React.useContext(ProductStore);
@@ -25,10 +26,14 @@ const MensIndex = () => {
     return (
         <div>
             <Header />
+            <Button onClick={() => productStore.createProduct()}>Hello</Button>
             <div className={classes.productTileOuterContainer}>
-                {productStore.products?.map((product: IProduct) => (
-                    <div className={classes.productTileInnerContainer}>
-                        <ProductTile product={product} classes={classes} />
+                {productStore.products?.map((product: IProduct, idx) => (
+                    <div
+                        className={classes.productTileInnerContainer}
+                        key={idx}
+                    >
+                        <ProductTile product={product} idx={idx} />
                     </div>
                 ))}
             </div>

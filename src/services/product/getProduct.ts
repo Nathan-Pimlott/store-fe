@@ -4,20 +4,15 @@ import axios from "axios";
 const getProduct = async (id: number) => {
     try {
         // Call the api to get the product by the id
-        let productRes = await axios.post(
-            `/api/product/get/${id}`,
-            {
-                id
-            }
-        );
+        let productRes = await axios.post(`/api/product/get/${id}`, {
+            id,
+        });
 
-        console.log('Product Res: ', productRes);
-        
         // Return the product data
-        return productRes.data
+        return productRes.data;
     } catch (error) {
         throw Error(error);
     }
-}
+};
 
 export default getProduct;

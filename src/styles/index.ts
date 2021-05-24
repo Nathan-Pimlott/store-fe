@@ -159,6 +159,8 @@ const classes = createUseStyles({
     productTileInnerContainer: {
         textAlign: "center !important",
         padding: 10,
+        maxWidth: 250,
+        margin: "auto",
     },
     productTileCard: {
         boxShadow: "none !important",

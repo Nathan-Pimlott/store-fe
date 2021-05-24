@@ -2,7 +2,7 @@ import { createContext } from "react";
 import { makeAutoObservable } from "mobx";
 import { Cookies } from "react-cookie";
 
-import { getProduct, getProducts } from "../services/product";
+import { getProduct, getProducts, createProduct } from "../services/product";
 import { IProduct, IFilterProducts } from "src/types";
 
 // prettier-ignore
@@ -26,6 +26,7 @@ class ProductStore {
         } catch (error) {
             console.error(error);
             this.error = error;
+            this.loading = false;
         }
     };
 
@@ -39,6 +40,7 @@ class ProductStore {
         } catch (error) {
             console.error(error.message);
             this.error = error.message;
+            this.loading = false;
         }
     };
 
@@ -47,6 +49,28 @@ class ProductStore {
             this.loading = true;
 
             this.products = await getProducts(filters);
+
+            this.loading = false;
+        } catch (error) {
+            console.error(error.message);
+            this.error = error.message;
+            this.loading = false;
+        }
+    };
+
+    createProduct = async () => {
+        try {
+            const product: IProduct = {
+                name: "",
+                description: "",
+                price: 10.99,
+                gender: "mens",
+                img: "",
+                color: "red",
+            };
+            this.loading = true;
+
+            await createProduct(product);
 
             this.loading = false;
         } catch (error) {

@@ -30,18 +30,12 @@ const Routes = () => {
         return (
             <HashRouter>
                 <Switch>
-                    <Route
-                        exact
-                        path="/register"
-                        component={Register}
-                    />
+                    <Route exact path="/register" component={Register} />
                     <Route path="/" component={Login} />
                 </Switch>
             </HashRouter>
         );
     }
-
-    console.log("Is logged in: ", authStore.user);
 
     return (
         <HashRouter>

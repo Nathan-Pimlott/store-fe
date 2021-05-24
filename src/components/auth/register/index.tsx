@@ -20,11 +20,8 @@ export default function () {
         showConfirmPassword: false,
     });
 
-    const register = async (values: IRegisterProps) => {
-        console.log("Values: ", values);
-
-        return await authStore.register(values);
-    };
+    const register = async (values: IRegisterProps) =>
+        await authStore.register(values);
 
     return (
         <Formik

@@ -39,8 +39,6 @@ class BasketStore {
 
             const basketItems = await cookies.get("basket_items");
 
-            console.log("Basket Items: ", basketItems);
-
             this.basket = basketItems;
 
             this.loading = false;
@@ -54,8 +52,6 @@ class BasketStore {
     addToBasket = async (item: IProduct) => {
         try {
             this.loading = true;
-
-            console.log("Item: ", item);
 
             let basketItems = await addToBasket(item);
 
@@ -85,7 +81,6 @@ class BasketStore {
 
             this.loading = false;
         } catch (error) {
-            console.log("error");
             console.error(error);
             this.error = error;
             this.loading = false;
@@ -94,8 +89,6 @@ class BasketStore {
 
     updateQuantity = async (id: string, quantity: number) => {
         try {
-            console.log("Quantity: ", quantity);
-
             if (quantity === 0) {
                 return this.removeFromBasket(id);
             }
@@ -110,7 +103,6 @@ class BasketStore {
 
             this.loading = false;
         } catch (error) {
-            console.log("error");
             console.error(error);
             this.error = error;
             this.loading = false;

@@ -47,9 +47,7 @@ interface ICreateUserResponse {
     };
 }
 
-export const createUser = async (
-    user: IUser
-): Promise<IUser | null> => {
+export const createUser = async (user: IUser): Promise<IUser | null> => {
     try {
         let userRes: ICreateUserResponse = await axios.post(
             "/api/user/create",
@@ -62,8 +60,6 @@ export const createUser = async (
         if (userRes.data.created) {
             cookies.set("user", JSON.stringify(userRes.data.user));
         }
-
-        console.log("User Res: ", userRes.data);
 
         return userRes.data.user;
     } catch (error) {

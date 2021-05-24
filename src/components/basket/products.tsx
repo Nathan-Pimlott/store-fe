@@ -3,7 +3,7 @@ import * as React from "react";
 import * as _ from "lodash";
 import { IProduct } from "../../types";
 
-import InlineProduct from "../lib/basketInlineProduct";
+import InlineProduct from "./inlineProduct";
 
 interface IProps {
     basket: IProduct[];

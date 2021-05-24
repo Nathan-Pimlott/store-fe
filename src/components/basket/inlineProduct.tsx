@@ -1,4 +1,4 @@
-import { IconButton, MenuItem, Select, Typography } from "@material-ui/core";
+import { IconButton, Typography } from "@material-ui/core";
 import { Delete } from "@material-ui/icons";
 import * as React from "react";
 import classnames from "classnames";
@@ -8,7 +8,7 @@ import { IProduct } from "../../types";
 import Classes from "../../styles";
 import BasketStore from "../../stores/basket";
 import { convertToCurrency } from "../../utils";
-import { Quantity } from ".";
+import { Quantity } from "../lib";
 
 interface IProps {
     product: IProduct;

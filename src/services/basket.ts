@@ -54,9 +54,6 @@ export async function removeFromBasket(productId: string) {
 
 export async function updateQuantity(productId: string, quantity: number) {
     try {
-        console.log("ProductId: ", productId);
-        console.log("quantity: ", quantity);
-
         let basketItems: IProduct[] = (await cookies.get("basket_items")) || [];
 
         if (basketItems.find((basket) => basket.id === productId).quantity) {

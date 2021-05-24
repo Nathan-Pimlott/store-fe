@@ -53,14 +53,10 @@ const Header = ({ history }: IProps) => {
                   .reduce((current, next) => current + next)
             : 0;
 
-    console.log("Basket Count: ", basketCount);
-
     return (
         <div className={classes.headerContainer}>
             <AppBar position="static">
                 <Toolbar>
-                    {/* <img src={Logo} className={classes.headerIcon} /> */}
-
                     <Typography variant="h6" style={{ color: "white" }}>
                         My Store
                     </Typography>
