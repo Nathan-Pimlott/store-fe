@@ -60,7 +60,6 @@ const classes = createUseStyles({
     //
     // HEADER
     headerContainer: {
-        flexGrow: 1,
         width: "100%",
         backgroundColor: `${primaryColor} !important`,
     },

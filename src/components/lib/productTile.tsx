@@ -28,8 +28,9 @@ const ProductTile = ({ product, idx }: IProps) => {
             style={{
                 display: "flex",
                 flexDirection: "column",
-                padding: "10px 20px 0 20px",
+                padding: 0,
                 textAlign: "center",
+                maxWidth: 300,
             }}
             key={idx}
         >
@@ -37,7 +38,7 @@ const ProductTile = ({ product, idx }: IProps) => {
                 <img
                     src={product.img}
                     alt="Product image"
-                    style={{ height: 200, width: "auto" }}
+                    style={{ height: 350, width: 300 }}
                 />
             </div>
             <div>

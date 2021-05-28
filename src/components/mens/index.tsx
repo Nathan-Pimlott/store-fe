@@ -1,5 +1,6 @@
 import { observer } from "mobx-react-lite";
 import * as React from "react";
+import { Button, Grid } from "@material-ui/core";
 
 import ProductStore from "../../stores/product";
 import Classes from "../../styles";
@@ -7,12 +8,17 @@ import Loading from "../core/loading";
 import ProductTile from "../lib/productTile";
 import { IProduct } from "../../types";
 import Header from "./header";
-import { Button } from "@material-ui/core";
+import Filters from "./filters";
 
 const MensIndex = () => {
     const productStore = React.useContext(ProductStore);
 
     const classes = Classes();
+
+    const [state, setState] = React.useState({
+        size: [],
+        color: [],
+    });
 
     React.useEffect(() => {
         productStore.getProducts({
@@ -26,17 +32,19 @@ const MensIndex = () => {
     return (
         <div>
             <Header />
-            <Button onClick={() => productStore.createProduct()}>Hello</Button>
-            <div className={classes.productTileOuterContainer}>
+            <Filters state={state} setState={setState} />
+            <Grid container className={classes.productTileOuterContainer}>
                 {productStore.products?.map((product: IProduct, idx) => (
-                    <div
+                    <Grid
                         className={classes.productTileInnerContainer}
                         key={idx}
+                        item
+                        xs
                     >
                         <ProductTile product={product} idx={idx} />
-                    </div>
+                    </Grid>
                 ))}
-            </div>
+            </Grid>
         </div>
     );
 };
