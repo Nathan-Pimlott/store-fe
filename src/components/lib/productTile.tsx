@@ -1,38 +1,37 @@
-import { Button, Card, Typography } from "@material-ui/core";
-import { PlusOne } from "@material-ui/icons";
 import * as React from "react";
-import classnames from "classnames";
+import { useHistory } from "react-router";
+import { Grid, Typography } from "@material-ui/core";
 
 import { IProduct } from "../../types";
 import Classes from "../../styles";
-import BasketStore from "../../stores/basket";
 import { convertToCurrency } from "../../utils";
-import { Quantity } from "../lib";
 
 interface IProps {
     product: IProduct;
     idx: number;
 }
 
-const ProductTile = ({ product, idx }: IProps) => {
+function ProductTile({ product, idx }: IProps) {
     const classes = Classes();
 
-    const basketStore = React.useContext(BasketStore);
-
-    function addToBasket() {
-        basketStore.addToBasket(product);
+    function goToProduct() {
+        const history = useHistory();
+        history.push(`/${product.id}`);
     }
 
     return (
-        <Card
+        <Grid
             style={{
                 display: "flex",
                 flexDirection: "column",
                 padding: 0,
-                textAlign: "center",
+                textAlign: "left",
                 maxWidth: 300,
+                margin: "auto",
+                cursor: "pointer",
             }}
             key={idx}
+            onClick={goToProduct}
         >
             <div style={{ flex: 1 }}>
                 <img
@@ -52,19 +51,8 @@ const ProductTile = ({ product, idx }: IProps) => {
                     </Typography>
                 </div>
             </div>
-            <div className={classes.basketRemoveProductContainer}>
-                <Button
-                    aria-label="delete"
-                    // className={classes.basketRemoveProductButton}
-                    onClick={addToBasket}
-                    fullWidth
-                    color="secondary"
-                >
-                    <PlusOne />
-                </Button>
-            </div>
-        </Card>
+        </Grid>
     );
-};
+}
 
 export default ProductTile;

@@ -15,7 +15,7 @@ const Header = () => {
         return <Loading />;
     }
 
-    return <div>Home department</div>;
+    return <div>Womens</div>;
 };
 
 export default observer(Header);

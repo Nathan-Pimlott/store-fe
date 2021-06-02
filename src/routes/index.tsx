@@ -11,7 +11,7 @@ import Login from "../components/auth/login";
 import Register from "../components/auth/register";
 import AuthStore from "../stores/auth";
 import Header from "../components/core/header";
-import Home from "../components/home";
+import Womens from "../components/womens";
 import Basket from "../components/basket";
 import Mens from "../components/mens";
 
@@ -41,9 +41,9 @@ const Routes = () => {
         <HashRouter>
             <Header />
             <Switch>
-                <Route exact path="/mens" component={Mens} />
+                <Route exact path="/mens/:page" component={Mens} />
+                <Route exact path="/womens/:page" component={Womens} />
                 <Route exact path="/basket" component={Basket} />
-                <Route path="/" component={Home} />
             </Switch>
         </HashRouter>
     );

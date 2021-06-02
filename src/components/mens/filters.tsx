@@ -1,4 +1,10 @@
-import { Grid, MenuItem, Select } from "@material-ui/core";
+import {
+    Grid,
+    InputLabel,
+    MenuItem,
+    Select,
+    Typography,
+} from "@material-ui/core";
 import * as React from "react";
 
 import Classes from "../../styles";
@@ -27,45 +33,62 @@ function MensFilters({ state, setState }: IProps) {
     const classes = Classes();
 
     return (
-        <div>
-            <Select
-                variant="outlined"
-                multiple
-                value={state.size}
-                onChange={(e) =>
-                    setState({
-                        ...state,
-                        size: e.target.value,
-                    })
-                }
-                label="Size"
-                placeholder="Size"
-            >
-                {filters.sizes.map((size, idx) => {
-                    <MenuItem value={size.value} key={idx}>
-                        {size.label}
-                    </MenuItem>;
-                })}
-            </Select>
-            <Select
-                variant="outlined"
-                multiple
-                value={state.color}
-                onChange={(e) =>
-                    setState({
-                        ...state,
-                        color: e.target.value,
-                    })
-                }
-                label="Color"
-                placeholder="Color"
-            >
-                {filters.colors.map((color, idx) => {
-                    <MenuItem value={color.value} key={idx}>
-                        {color.label}
-                    </MenuItem>;
-                })}
-            </Select>
+        <div style={{ padding: 20 }}>
+            <Typography variant="h6" color="primary">
+                Filter results
+            </Typography>
+
+            <div style={{ display: "flex", marginTop: 10 }}>
+                <div style={{ minWidth: 250, maxWidth: 300 }}>
+                    <InputLabel id="mens-size">Size</InputLabel>
+                    <Select
+                        labelId="mens-size"
+                        id="mens-size"
+                        style={{ minWidth: 250, maxWidth: 300 }}
+                        inputProps={{
+                            name: "size",
+                            id: "mens-size",
+                        }}
+                        multiple
+                        value={state.size}
+                        onChange={(e) =>
+                            setState({
+                                ...state,
+                                size: e.target.value,
+                            })
+                        }
+                    >
+                        {filters.sizes.map((size, idx) => (
+                            <MenuItem value={size.value} key={idx}>
+                                {size.label}
+                            </MenuItem>
+                        ))}
+                    </Select>
+                </div>
+
+                <div style={{ minWidth: 250, maxWidth: 300, marginLeft: 20 }}>
+                    <InputLabel id="mens-colour">Colour</InputLabel>
+                    <Select
+                        labelId="mens-colour"
+                        id="mens-colour"
+                        multiple
+                        value={state.color}
+                        style={{ minWidth: 250, maxWidth: 300 }}
+                        onChange={(e) =>
+                            setState({
+                                ...state,
+                                color: e.target.value,
+                            })
+                        }
+                    >
+                        {filters.colors.map((color, idx) => (
+                            <MenuItem value={color.value} key={idx}>
+                                {color.label}
+                            </MenuItem>
+                        ))}
+                    </Select>
+                </div>
+            </div>
         </div>
     );
 }

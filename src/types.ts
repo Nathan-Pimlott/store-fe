@@ -36,4 +36,5 @@ export interface IFilterProducts {
     priceMin?: number;
     priceMax?: number;
     color?: string;
+    page?: number;
 }

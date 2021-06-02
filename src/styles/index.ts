@@ -142,10 +142,8 @@ const classes = createUseStyles({
         width: "auto",
         borderRadius: 3,
     },
-    productTileOuterContainer: {
-        display: "grid",
-        gridGap: "1px",
-        gridTemplateColumns: "repeat(3, 1fr)",
+    productOverviewOuterContainer: {
+        backgroundColor: "white",
     },
     productContainer: {
         display: "flex",

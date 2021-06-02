@@ -1,7 +1,7 @@
-import { createContext } from 'react';
-import { makeAutoObservable } from 'mobx';
+import { createContext } from "react";
+import { makeAutoObservable } from "mobx";
 
-type IBannerType = 'success' | 'error' | 'warning' | null;
+type IBannerType = "success" | "error" | "warning" | null;
 
 class BannerStore {
     open: boolean = false;
@@ -10,7 +10,7 @@ class BannerStore {
     error: any = null;
 
     constructor() {
-        makeAutoObservable(this)
+        makeAutoObservable(this);
     }
 
     hideBanner = async () => {
@@ -21,7 +21,7 @@ class BannerStore {
         } catch (error) {
             this.error = error;
         }
-    }
+    };
 
     showBanner = async (message: string, bannerType: IBannerType) => {
         try {
@@ -31,9 +31,9 @@ class BannerStore {
         } catch (error) {
             this.error = error;
         }
-    }
+    };
 }
 
-const bannerStore = createContext(new BannerStore())
+const bannerStore = createContext(new BannerStore());
 
-export default bannerStore
+export default bannerStore;
