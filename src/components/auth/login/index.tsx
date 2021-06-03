@@ -76,6 +76,7 @@ const Login = () => {
                             <React.Fragment>
                                 <div className={classes.largeMarginTop} />
                                 <Typography
+                                    id="auth-login-error"
                                     variant="body1"
                                     className={classes.errorMessage}
                                 >
@@ -87,6 +88,7 @@ const Login = () => {
                         <div className={classes.largeMarginTop} />
 
                         <Button
+                            id="auth-login-button"
                             type="submit"
                             disabled={isSubmitting}
                             fullWidth

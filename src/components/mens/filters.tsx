@@ -49,7 +49,6 @@ function MensFilters({ state, setState }: IProps) {
                             name: "size",
                             id: "mens-size",
                         }}
-                        multiple
                         value={state.size}
                         onChange={(e) =>
                             setState({
@@ -71,7 +70,6 @@ function MensFilters({ state, setState }: IProps) {
                     <Select
                         labelId="mens-colour"
                         id="mens-colour"
-                        multiple
                         value={state.color}
                         style={{ minWidth: 250, maxWidth: 300 }}
                         onChange={(e) =>

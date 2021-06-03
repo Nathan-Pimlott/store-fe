@@ -15,24 +15,27 @@ interface IProps {
     errorMessage: string;
     showPassword: boolean;
     toggleShowPassword: any;
-    confirm?: boolean
+    confirm?: boolean;
 }
 
 export const Password = (props: IProps) => {
-    let fieldName = props.confirm ? 'confirmPassword' : 'password';    
+    let fieldName = props.confirm ? "confirmPassword" : "password";
 
     return (
         <React.Fragment>
             <div className={props.classes.largeMarginTop} />
 
-            <InputLabel className={props.classes.fieldLabel} htmlFor={fieldName}>
-                {props.confirm && 'Confirm '}Password
+            <InputLabel
+                className={props.classes.fieldLabel}
+                htmlFor={fieldName}
+            >
+                {props.confirm && "Confirm "}Password
             </InputLabel>
 
             <Input
-                id={fieldName}
+                id="password"
                 type={props.showPassword ? "text" : "password"}
-                name={fieldName}
+                name="password"
                 onChange={props.onChange}
                 endAdornment={
                     <InputAdornment position="end">
@@ -55,4 +58,4 @@ export const Password = (props: IProps) => {
             </Typography>
         </React.Fragment>
     );
-}
+};

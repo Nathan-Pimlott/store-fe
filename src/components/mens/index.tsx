@@ -12,23 +12,42 @@ import Header from "./header";
 import Filters from "./filters";
 import ViewMore from "./viewMore";
 
+interface IParams {
+    page?: string;
+}
+
 const MensIndex = () => {
     const productStore = React.useContext(ProductStore);
-    const { page } = useParams();
+    const params = useParams<IParams>();
 
     const classes = Classes();
 
     const [state, setState] = React.useState({
-        size: [],
-        color: [],
+        page: 1,
+        size: "",
+        color: "",
     });
 
     React.useEffect(() => {
         productStore.getProducts({
             gender: "mens",
-            page,
+            page: state.page,
         });
     }, []);
+
+    async function setPage(value: number) {
+        setState({ ...state, page: value });
+        return getProducts();
+    }
+
+    function getProducts() {
+        productStore.getProducts({
+            gender: "mens",
+            page: state.page,
+            size: state.size,
+            color: state.color,
+        });
+    }
 
     if (productStore.loading) {
         return <Loading />;
@@ -52,7 +71,7 @@ const MensIndex = () => {
                     </Grid>
                 ))}
             </Grid>
-            <ViewMore />
+            <ViewMore page={state.page} setPage={setPage} />
         </div>
     );
 };

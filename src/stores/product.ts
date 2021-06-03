@@ -14,6 +14,7 @@ class ProductStore {
     showBanner: boolean = false;
     bannerMessage: string = "";
     products: IProduct[] | null = null;
+    productCount: number | null = null;
 
     constructor() {
         makeAutoObservable(this);
@@ -48,7 +49,9 @@ class ProductStore {
         try {
             this.loading = true;
 
-            this.products = await getProducts(filters);
+            const productRes = await getProducts(filters);
+            this.products = productRes.products;
+            this.productCount = productRes.count;
 
             this.loading = false;
         } catch (error) {

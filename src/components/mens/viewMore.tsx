@@ -1,31 +1,39 @@
-import {
-    Button,
-    Grid,
-    InputLabel,
-    MenuItem,
-    Select,
-    Typography,
-} from "@material-ui/core";
+import { Typography } from "@material-ui/core";
+import { Pagination } from "@material-ui/lab";
 import * as React from "react";
-import { useParams } from "react-router";
+import ProductStore from "../../stores/product";
 
 import Classes from "../../styles";
 
-function MensFilters() {
+interface IProps {
+    page: number;
+    setPage: (v: number) => any;
+}
+
+function MensFilters({ page, setPage }: IProps) {
     const classes = Classes();
+    const productStore = React.useContext(ProductStore);
 
-    const { page } = useParams();
-    const { PRODUCTS_PER_PAGE } = process.env;
+    const productsPerPage = parseInt(process.env.PRODUCTS_PER_PAGE);
 
-    const viewing = page * parseInt(PRODUCTS_PER_PAGE);
+    // If the page is not filled, show the number of products on the page
+    const viewing =
+        page * productsPerPage > productStore.productCount
+            ? page * productsPerPage
+            : productStore.productCount;
+
+    const numberOfPages = Math.ceil(
+        productStore.productCount / productsPerPage
+    );
 
     return (
-        <div style={{ padding: 20 }}>
-            <Typography variant="h6" color="primary">
-                Viewing {viewing} of 1,000,000 products
-            </Typography>
-
-            <Button>View more</Button>
+        <div style={{ padding: 20, display: "flex", flexDirection: "column" }}>
+            <Pagination
+                style={{ margin: "10px auto 0 auto" }}
+                count={numberOfPages}
+                page={page}
+                onChange={(_e, v) => setPage(v)}
+            />
         </div>
     );
 }

@@ -8,8 +8,10 @@ const getProducts = async (filters: IFilterProducts) => {
         // Call the api to get the product by the filtered values
         let productRes = await axios.post("/api/product/get", filters);
 
+        console.log("productRes.data: ", productRes.data);
+
         // Return the product array data
-        return productRes.data?.products;
+        return productRes.data;
     } catch (error) {
         throw Error(error);
     }
