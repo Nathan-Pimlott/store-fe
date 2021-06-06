@@ -5,11 +5,19 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v1
+      - name: Install dependencies
+        run: npm install
+      - name: Run build
+        run: npm build
       - name: Run unit tests
-        run: npm run test
+        run: npm test
   functional-test:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v1
+      - name: Install dependencies
+        run: npm install
+      - name: Run build
+        run: npm build
       - name: Run functional tests
         run: npm run functional
