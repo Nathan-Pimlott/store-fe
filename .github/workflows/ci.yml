@@ -10,7 +10,7 @@ jobs:
       - name: Run build
         run: npm build
       - name: Run unit tests
-        run: npm test
+        run: npm run test:unit
   functional-test:
     runs-on: ubuntu-latest
     steps:
@@ -20,4 +20,4 @@ jobs:
       - name: Run build
         run: npm build
       - name: Run functional tests
-        run: npm run functional
+        run: npm run test:functional

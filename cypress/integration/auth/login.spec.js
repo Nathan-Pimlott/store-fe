@@ -2,7 +2,7 @@
 
 describe("Testing login screen", () => {
     it("should go to the web app", () => {
-        cy.visit("http://localhost:8080");
+        cy.visit("");
     });
     it("should clear the cookies on the page", () => {
         cy.clearCookies();
