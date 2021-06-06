@@ -2,13 +2,14 @@ import * as React from "react";
 import { Button, Typography, Link, LinearProgress } from "@material-ui/core";
 import { Formik } from "formik";
 import classnames from "classnames";
+import { observer } from "mobx-react-lite";
 
 import AuthStore from "../../../stores/auth";
 import Classes from "../../../styles";
-import { observer } from "mobx-react-lite";
 import { validateLogin } from "../../../services/validation/auth";
 import { ILoginProps } from "../../../types";
-import { Email, Password } from "../../lib";
+import { TextField } from "../../lib";
+import { Visibility, VisibilityOff } from "@material-ui/icons";
 
 const Logo = require("../../../assets/shenron.png");
 
@@ -44,25 +45,38 @@ const Login = () => {
                     >
                         <img src={Logo} className={classes.authLogo} />
 
-                        <Email
+                        <TextField
+                            id="login-email"
+                            fieldName="email"
+                            label="Email address"
                             classes={classes}
                             onChange={handleChange}
                             showError={errors.email && touched.email}
                             errorMessage={errors.email}
                         />
 
-                        <Password
+                        <TextField
+                            id="login-password"
+                            fieldName="password"
+                            label="Password"
                             classes={classes}
                             onChange={handleChange}
                             showError={errors.password && touched.password}
                             errorMessage={errors.password}
-                            showPassword={state.showPassword}
-                            toggleShowPassword={() => {
+                            onIconClick={() => {
                                 setState({
                                     ...state,
                                     showPassword: !state.showPassword,
                                 });
                             }}
+                            iconPosition="end"
+                            icon={
+                                state.showPassword ? (
+                                    <Visibility />
+                                ) : (
+                                    <VisibilityOff />
+                                )
+                            }
                         />
 
                         {(isSubmitting || authStore.processing) && (
@@ -76,7 +90,7 @@ const Login = () => {
                             <React.Fragment>
                                 <div className={classes.largeMarginTop} />
                                 <Typography
-                                    id="auth-login-error"
+                                    id="login-error"
                                     variant="body1"
                                     className={classes.errorMessage}
                                 >
@@ -88,7 +102,7 @@ const Login = () => {
                         <div className={classes.largeMarginTop} />
 
                         <Button
-                            id="auth-login-button"
+                            id="login-button"
                             type="submit"
                             disabled={isSubmitting}
                             fullWidth
@@ -107,6 +121,7 @@ const Login = () => {
                                 classes.registerLink,
                                 "auth-link"
                             )}
+                            id="login-register-link"
                         >
                             Need an account? Register here
                         </Link>

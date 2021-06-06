@@ -6,8 +6,9 @@ import classnames from "classnames";
 import AuthStore from "../../../stores/auth";
 import Classes from "../../../styles";
 import { validateRegister } from "../../../services/validation/auth";
-import { Email, Password, TextField } from "../../lib";
+import { TextField } from "../../lib";
 import { IRegisterProps } from "src/types";
+import { Visibility, VisibilityOff } from "@material-ui/icons";
 
 const Logo = require("../../../assets/shenron.png");
 
@@ -58,28 +59,44 @@ export default function () {
                             Create An Account
                         </Typography>
 
-                        <Email
+                        <TextField
+                            id="register-email"
+                            fieldName="email"
+                            label="Email address"
                             classes={classes}
                             onChange={handleChange}
                             showError={errors.email && touched.email}
                             errorMessage={errors.email}
                         />
 
-                        <Password
+                        <TextField
+                            id="register-password"
+                            fieldName="password"
+                            label="Password"
                             classes={classes}
                             onChange={handleChange}
                             showError={errors.password && touched.password}
                             errorMessage={errors.password}
-                            showPassword={state.showPassword}
-                            toggleShowPassword={() => {
+                            onIconClick={() => {
                                 setState({
                                     ...state,
                                     showPassword: !state.showPassword,
                                 });
                             }}
+                            iconPosition="end"
+                            icon={
+                                state.showPassword ? (
+                                    <Visibility />
+                                ) : (
+                                    <VisibilityOff />
+                                )
+                            }
                         />
 
-                        <Password
+                        <TextField
+                            id="register-confirm-password"
+                            fieldName="confirmPassword"
+                            label="Confirm password"
                             classes={classes}
                             onChange={handleChange}
                             showError={
@@ -87,30 +104,37 @@ export default function () {
                                 touched.confirmPassword
                             }
                             errorMessage={errors.confirmPassword}
-                            showPassword={state.showConfirmPassword}
-                            toggleShowPassword={() => {
+                            onIconClick={() => {
                                 setState({
                                     ...state,
-                                    showConfirmPassword:
-                                        !state.showConfirmPassword,
+                                    showConfirmPassword: !state.showPassword,
                                 });
                             }}
-                            confirm={true}
+                            iconPosition="end"
+                            icon={
+                                state.showConfirmPassword ? (
+                                    <Visibility />
+                                ) : (
+                                    <VisibilityOff />
+                                )
+                            }
                         />
 
                         <TextField
-                            classes={classes}
+                            id="register-forename"
                             fieldName="forename"
                             label="Forename"
+                            classes={classes}
                             onChange={handleChange}
                             showError={errors.forename && touched.forename}
                             errorMessage={errors.forename}
                         />
 
                         <TextField
-                            classes={classes}
+                            id="register-surname"
                             fieldName="surname"
                             label="Surname"
+                            classes={classes}
                             onChange={handleChange}
                             showError={errors.surname && touched.surname}
                             errorMessage={errors.surname}
@@ -119,6 +143,7 @@ export default function () {
                         <div className={classes.largeMarginTop} />
 
                         <Button
+                            id="register-button"
                             type="submit"
                             disabled={isSubmitting}
                             fullWidth
@@ -131,6 +156,7 @@ export default function () {
                         <div className={classes.largeMarginTop} />
 
                         <Link
+                            id="register-login-link"
                             variant="body2"
                             href="/#/"
                             className={classnames(

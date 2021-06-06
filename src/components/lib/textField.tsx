@@ -1,13 +1,26 @@
 import * as React from "react";
-import { InputLabel, TextField as Tf, Typography } from "@material-ui/core";
+import {
+    InputLabel,
+    Input,
+    Typography,
+    InputAdornment,
+    IconButton,
+} from "@material-ui/core";
 
 interface IProps {
+    // Cypress field name
+    id: string;
+    // Formik field name
     fieldName: string;
     label: string;
     classes: any;
     onChange: any;
-    showError: boolean;
-    errorMessage: string;
+    showError?: boolean;
+    errorMessage?: string;
+    type?: string;
+    icon?: any;
+    iconPosition?: "start" | "end";
+    onIconClick?: any;
 }
 
 export const TextField = (props: IProps) => {
@@ -16,19 +29,36 @@ export const TextField = (props: IProps) => {
             <div className={props.classes.largeMarginTop} />
 
             <InputLabel
+                id={`${props.id}-label`}
                 className={props.classes.fieldLabel}
                 htmlFor={props.fieldName}
             >
                 {props.label}
             </InputLabel>
 
-            <Tf
-                id={props.fieldName}
+            <Input
+                id={props.id}
                 name={props.fieldName}
                 onChange={props.onChange}
+                type={props.type || "text"}
+                endAdornment={
+                    props.icon ? (
+                        <InputAdornment position={props.iconPosition}>
+                            <IconButton
+                                aria-label="toggle password visibility"
+                                onClick={props.onIconClick}
+                            >
+                                {props.icon}
+                            </IconButton>
+                        </InputAdornment>
+                    ) : null
+                }
             />
 
-            <Typography className={props.classes.errorMessage}>
+            <Typography
+                id={`${props.id}-error`}
+                className={props.classes.errorMessage}
+            >
                 {props.showError && props.errorMessage}
             </Typography>
         </React.Fragment>
