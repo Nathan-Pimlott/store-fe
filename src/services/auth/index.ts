@@ -1,3 +1,4 @@
+import jwt from "jsonwebtoken";
 import { Cookies } from "react-cookie";
 import axios from "axios";
 import adapter from "axios/lib/adapters/http";
@@ -19,11 +20,16 @@ export const authenticate = async (
     password: string
 ): Promise<IUser | null> => {
     try {
+        const signedPassword = jwt.sign(
+            { password },
+            process.env.JWT_SIGNATURE
+        );
+
         let userRes: IAuthResponse = await axios.post(
             "/api/user/authenticate",
             {
                 email,
-                password,
+                password: signedPassword,
             },
             {
                 adapter,

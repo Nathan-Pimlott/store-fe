@@ -21,9 +21,8 @@ const Login = () => {
         showPassword: false,
     });
 
-    const login = async ({ email, password }: ILoginProps) => {
-        return await authStore.authenticate(email, password);
-    };
+    const login = async ({ email, password }: ILoginProps) =>
+        await authStore.authenticate(email, password);
 
     return (
         <Formik
@@ -70,6 +69,7 @@ const Login = () => {
                                 });
                             }}
                             iconPosition="end"
+                            type={state.showPassword ? "test" : "password"}
                             icon={
                                 state.showPassword ? (
                                     <Visibility />

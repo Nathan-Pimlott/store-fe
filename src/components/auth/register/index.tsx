@@ -77,6 +77,7 @@ export default function () {
                             onChange={handleChange}
                             showError={errors.password && touched.password}
                             errorMessage={errors.password}
+                            type={state.showPassword ? "test" : "password"}
                             onIconClick={() => {
                                 setState({
                                     ...state,
@@ -110,6 +111,7 @@ export default function () {
                                     showConfirmPassword: !state.showPassword,
                                 });
                             }}
+                            type={state.showPassword ? "test" : "password"}
                             iconPosition="end"
                             icon={
                                 state.showConfirmPassword ? (
