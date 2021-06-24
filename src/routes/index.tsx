@@ -41,8 +41,8 @@ const Routes = () => {
         <HashRouter>
             <Header />
             <Switch>
-                <Route exact path="/mens/:page" component={Mens} />
-                <Route exact path="/womens/:page" component={Womens} />
+                <Route exact path="/mens" component={Mens} />
+                <Route exact path="/womens" component={Womens} />
                 <Route exact path="/basket" component={Basket} />
             </Switch>
         </HashRouter>

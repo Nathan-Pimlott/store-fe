@@ -39,3 +39,5 @@ export interface IFilterProducts {
     size?: any;
     page?: number;
 }
+
+export type IGender = "mens" | "womens";

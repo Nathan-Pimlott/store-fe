@@ -7,7 +7,7 @@ import Classes from "../../styles";
 
 interface IProps {
     page: number;
-    setPage: (v: number) => any;
+    setPage: (prop: "page", value: number) => void;
 }
 
 function MensFilters({ page, setPage }: IProps) {
@@ -32,7 +32,7 @@ function MensFilters({ page, setPage }: IProps) {
                 style={{ margin: "10px auto 0 auto" }}
                 count={numberOfPages}
                 page={page}
-                onChange={(_e, v) => setPage(v)}
+                onChange={(_, v) => setPage("page", v)}
             />
         </div>
     );

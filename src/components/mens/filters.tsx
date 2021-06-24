@@ -10,11 +10,11 @@ import * as React from "react";
 import Classes from "../../styles";
 
 interface IProps {
-    state: any;
-    setState: any;
+    filters: any;
+    setFilters: (fieldName: string, value: string) => void;
 }
 
-const filters = {
+const options = {
     colors: [
         { value: "red", label: "Red" },
         { value: "white", label: "White" },
@@ -29,7 +29,7 @@ const filters = {
     ],
 };
 
-function MensFilters({ state, setState }: IProps) {
+function MensFilters({ filters, setFilters }: IProps) {
     const classes = Classes();
 
     return (
@@ -49,15 +49,12 @@ function MensFilters({ state, setState }: IProps) {
                             name: "size",
                             id: "mens-size",
                         }}
-                        value={state.size}
+                        value={filters.size}
                         onChange={(e) =>
-                            setState({
-                                ...state,
-                                size: e.target.value,
-                            })
+                            setFilters("size", e.target.value as string)
                         }
                     >
-                        {filters.sizes.map((size, idx) => (
+                        {options.sizes.map((size, idx) => (
                             <MenuItem value={size.value} key={idx}>
                                 {size.label}
                             </MenuItem>
@@ -70,16 +67,13 @@ function MensFilters({ state, setState }: IProps) {
                     <Select
                         labelId="mens-colour"
                         id="mens-colour"
-                        value={state.color}
+                        value={filters.color}
                         style={{ minWidth: 250, maxWidth: 300 }}
                         onChange={(e) =>
-                            setState({
-                                ...state,
-                                color: e.target.value,
-                            })
+                            setFilters("color", e.target.value as string)
                         }
                     >
-                        {filters.colors.map((color, idx) => (
+                        {options.colors.map((color, idx) => (
                             <MenuItem value={color.value} key={idx}>
                                 {color.label}
                             </MenuItem>

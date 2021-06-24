@@ -1,13 +1,14 @@
 import { observer } from "mobx-react-lite";
 import * as React from "react";
 import { Grid } from "@material-ui/core";
-import { useParams } from "react-router-dom";
+import { useHistory, useLocation } from "react-router-dom";
+import { decode, encode } from "querystring";
 
 import ProductStore from "../../stores/product";
 import Classes from "../../styles";
 import Loading from "../core/loading";
 import ProductTile from "../lib/productTile";
-import { IProduct } from "../../types";
+import { IGender, IProduct } from "../../types";
 import Header from "./header";
 import Filters from "./filters";
 import ViewMore from "./viewMore";
@@ -16,46 +17,45 @@ interface IParams {
     page?: string;
 }
 
+interface IFilters {
+    gender: IGender;
+    page: number;
+    size: string;
+    color: string;
+}
+
 const MensIndex = () => {
     const productStore = React.useContext(ProductStore);
-    const params = useParams<IParams>();
-
+    const history = useHistory();
+    const qsData = decode(useLocation().search.replace("?", ""));
     const classes = Classes();
 
-    const [state, setState] = React.useState({
-        page: 1,
-        size: "",
-        color: "",
-    });
+    const filters: IFilters = {
+        gender: "mens",
+        page: qsData.page ? parseInt(qsData.page as string) : 1,
+        size: (qsData.page as string) || "",
+        color: (qsData.color as string) || "",
+    };
 
     React.useEffect(() => {
-        productStore.getProducts({
-            gender: "mens",
-            page: state.page,
-        });
+        productStore.getProducts(filters);
     }, []);
 
-    async function setPage(value: number) {
-        setState({ ...state, page: value });
-        return getProducts();
-    }
-
-    function getProducts() {
-        productStore.getProducts({
-            gender: "mens",
-            page: state.page,
-            size: state.size,
-            color: state.color,
+    async function setQsData(propName: string, value: number | string) {
+        history.push({
+            pathname: "/#/mens",
+            search: encode({ ...qsData, [propName]: value }),
         });
     }
 
     if (productStore.loading) {
         return <Loading />;
     }
+
     return (
         <div>
             <Header />
-            <Filters state={state} setState={setState} />
+            <Filters filters={qsData} setFilters={setQsData} />
             <Grid container className={classes.productOverviewOuterContainer}>
                 {productStore.products?.map((product: IProduct, idx) => (
                     <Grid
@@ -71,7 +71,7 @@ const MensIndex = () => {
                     </Grid>
                 ))}
             </Grid>
-            <ViewMore page={state.page} setPage={setPage} />
+            <ViewMore page={filters.page} setPage={setQsData} />
         </div>
     );
 };

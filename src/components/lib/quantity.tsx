@@ -17,7 +17,9 @@ export const Quantity = (props: IProps) => (
             style={{ marginLeft: 10 }}
         >
             {times(10, (i: number) => (
-                <MenuItem value={i + 1}>{i + 1}</MenuItem>
+                <MenuItem key={i} value={i + 1}>
+                    {i + 1}
+                </MenuItem>
             ))}
         </Select>
     </div>
