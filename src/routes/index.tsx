@@ -7,13 +7,15 @@ import {
 } from "react-router-dom";
 import { observer } from "mobx-react-lite";
 
-import Login from "../components/auth/login";
-import Register from "../components/auth/register";
 import AuthStore from "../stores/auth";
-import Header from "../components/core/header";
-import Womens from "../components/womens";
+
 import Basket from "../components/basket";
+import Header from "../components/core/header";
+import Login from "../components/auth/login";
 import Mens from "../components/mens";
+import Product from "../components/product";
+import Register from "../components/auth/register";
+import Womens from "../components/womens";
 
 const Routes = () => {
     const authStore = React.useContext(AuthStore);
@@ -43,6 +45,7 @@ const Routes = () => {
             <Switch>
                 <Route exact path="/mens" component={Mens} />
                 <Route exact path="/womens" component={Womens} />
+                <Route exact path="/product/:productId" component={Product} />
                 <Route exact path="/basket" component={Basket} />
             </Switch>
         </HashRouter>

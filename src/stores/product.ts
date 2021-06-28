@@ -14,6 +14,7 @@ class ProductStore {
     showBanner: boolean = false;
     bannerMessage: string = "";
     products: IProduct[] | null = null;
+    product: IProduct | null = null;
     productCount: number | null = null;
 
     constructor() {
@@ -35,7 +36,7 @@ class ProductStore {
         try {
             this.loading = true;
 
-            this.products = await getProduct(productId);
+            this.product = await getProduct(productId);
 
             this.loading = false;
         } catch (error) {

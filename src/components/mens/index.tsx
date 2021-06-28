@@ -43,9 +43,13 @@ const MensIndex = () => {
 
     async function setQsData(propName: string, value: number | string) {
         history.push({
-            pathname: "/#/mens",
+            pathname: "",
             search: encode({ ...qsData, [propName]: value }),
         });
+    }
+
+    function goToProduct(productId: string) {
+        history.push(`product/${productId}`);
     }
 
     if (productStore.loading) {
@@ -67,7 +71,11 @@ const MensIndex = () => {
                         md={4}
                         lg={3}
                     >
-                        <ProductTile product={product} idx={idx} />
+                        <ProductTile
+                            product={product}
+                            goToProduct={goToProduct}
+                            idx={idx}
+                        />
                     </Grid>
                 ))}
             </Grid>

@@ -9,15 +9,11 @@ import { convertToCurrency } from "../../utils";
 interface IProps {
     product: IProduct;
     idx: number;
+    goToProduct: (productId: string) => void;
 }
 
-function ProductTile({ product, idx }: IProps) {
+function ProductTile({ product, idx, goToProduct }: IProps) {
     const classes = Classes();
-
-    function goToProduct() {
-        const history = useHistory();
-        history.push(`/${product.id}`);
-    }
 
     return (
         <Grid
@@ -31,7 +27,9 @@ function ProductTile({ product, idx }: IProps) {
                 cursor: "pointer",
             }}
             key={idx}
-            onClick={goToProduct}
+            onClick={() => {
+                goToProduct(product.id);
+            }}
         >
             <div style={{ flex: 1 }}>
                 <img
