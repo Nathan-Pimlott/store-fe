@@ -1,8 +1,23 @@
 # Store Front End
 
+Front end application that allows users to
+
+-   Log into their account
+-   Create a new account
+-   View and filter a list of mens and womens products
+-   View a product and add it to their basket
+-   View their basket
+-   Update the quantity of a product and remove it from their basket
+
 ## Installation
 
-1. Install dependencies
+1. Clone the project
+
+```shell
+https://github.com/Nathan-Pimlott/store-fe.git
+```
+
+2. Install dependencies
 
 ```shell
 npm install
@@ -10,29 +25,41 @@ npm install
 
 ### Setup local data
 
-1. This UI and it's API rely on some test data (mock data will be added in the future). Run the commands in setup.sql to create some basic data for the UI.
+This UI and it's API rely on some test data (mock data will be added in the future).
+
+1. Run the commands in `setup.sql` to create some basic data for the UI.
 
 ## Run locally
 
-1. Clone https://github.com/Nathan-Pimlott/store-api and follow setup instructions to get it running
+1. Clone the projects API
 
-2. Run `npm run dev` to start the application locally
+```shell
+https://github.com/Nathan-Pimlott/store-api
+```
 
-## Testing
+2. Follow `Installation` to install dependencies
+
+3. Start the API development server
+
+```shell
+npm run dev
+```
+
+## Run unit tests
 
 1. Follow `Installation` to install dependencies.
 
-2. Run the unit tests
+2. Run the tests
 
 ```shell
-npm run test
+npm run test:unit
 ```
 
 ### Run functional tests
 
 1. Follow `Installation` to install dependencies.
 
-2. Run the functional command
+2. Run the tests
 
 ```shell
 npm run test:functional
