@@ -11,7 +11,11 @@ const ProductImage = ({ imgSrc, classes }: IProductImageProps) => {
             <img
                 src={imgSrc}
                 alt="product image"
-                style={{ margin: "auto 0 auto auto" }}
+                style={{
+                    margin: "auto 0 auto auto",
+                    height: 600,
+                    width: "auto",
+                }}
             />
         </div>
     );

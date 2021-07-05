@@ -11,6 +11,7 @@ import AuthStore from "../stores/auth";
 
 import Basket from "../components/basket";
 import Header from "../components/core/header";
+import Footer from "../components/core/footer";
 import Login from "../components/auth/login";
 import Mens from "../components/mens";
 import Product from "../components/product";
@@ -48,6 +49,7 @@ const Routes = () => {
                 <Route exact path="/product/:productId" component={Product} />
                 <Route exact path="/basket" component={Basket} />
             </Switch>
+            <Footer />
         </HashRouter>
     );
 };

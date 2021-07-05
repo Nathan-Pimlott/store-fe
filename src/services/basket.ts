@@ -29,19 +29,12 @@ export async function addToBasket(item: IProduct) {
 
 export async function removeFromBasket(productId: string) {
     try {
-        let basketItems: IProduct[] = (await cookies.get("basket_items")) || [];
+        const basketItems: IProduct[] =
+            (await cookies.get("basket_items")) || [];
 
-        let newBasketItems: IProduct[];
-
-        if (
-            basketItems.find((basket) => basket.id === productId).quantity > 1
-        ) {
-            basketItems.find((basket) => basket.id === productId).quantity -= 1;
-        } else {
-            newBasketItems = basketItems.filter(
-                (item) => item.id !== productId
-            );
-        }
+        let newBasketItems = basketItems.filter(
+            (item) => item.id !== productId
+        );
 
         cookies.set("basket_items", JSON.stringify(newBasketItems));
 

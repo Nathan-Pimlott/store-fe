@@ -14,9 +14,10 @@ const paymentTypes: string[] = ["visa", "paypal", "amex"];
 function BasketTotal({ basket }: IProps) {
     const classes = Classes();
 
-    const basketTotal: number = basket
-        ? basket?.reduce((a, b) => a + b.quantity * b.price, 0)
-        : 0;
+    const basketTotal: number =
+        basket?.length > 0
+            ? basket?.reduce((a, b) => a + b.quantity * b.price, 0)
+            : 0;
 
     const shipping: number = 3.99;
 

@@ -44,7 +44,7 @@ const ProductDetails = ({
                     {product.description}
                 </Typography>
 
-                <Typography style={{ marginTop: 20 }}>
+                <Typography style={{ fontWeight: "bold" }}>
                     {convertToCurrency(product.price)}
                 </Typography>
 
@@ -52,7 +52,7 @@ const ProductDetails = ({
                     id={`${product.name}-size`}
                     style={{ marginTop: 20 }}
                 >
-                    Colour
+                    Size
                 </InputLabel>
 
                 <Select

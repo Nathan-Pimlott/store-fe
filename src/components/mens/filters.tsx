@@ -16,11 +16,13 @@ interface IProps {
 
 const options = {
     colors: [
+        { value: "", label: "Any" },
         { value: "red", label: "Red" },
         { value: "white", label: "White" },
         { value: "yellow", label: "Yellow" },
     ],
     sizes: [
+        { value: "", label: "Any" },
         { value: "xs", label: "Extra Small" },
         { value: "s", label: "Small" },
         { value: "m", label: "Medium" },

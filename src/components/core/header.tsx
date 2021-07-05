@@ -46,12 +46,19 @@ const Header = ({ history }: IProps) => {
         }
     }
 
-    const basketCount =
+    console.log("basketStore.basket: ", basketStore.basket);
+
+    let basketCount = 0;
+    console.log(
+        "basketStore.basket?.length > 0: ",
         basketStore.basket?.length > 0
-            ? basketStore.basket
-                  ?.map((item) => item.quantity)
-                  .reduce((current, next) => current + next)
-            : 0;
+    );
+
+    basketStore.basket?.length > 0
+        ? basketStore.basket?.map((item) => (basketCount += item.quantity))
+        : 0;
+
+    console.log("basketCount: ", basketCount);
 
     return (
         <div className={classes.headerContainer}>

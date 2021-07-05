@@ -73,6 +73,7 @@ class BasketStore {
             this.loading = true;
 
             const newBasketItems = await removeFromBasket(id);
+            console.log("New basket item: ", newBasketItems);
 
             this.basket = newBasketItems;
 

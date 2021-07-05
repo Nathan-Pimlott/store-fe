@@ -8,14 +8,10 @@ import ProductStore from "../../stores/product";
 import Classes from "../../styles";
 import Loading from "../core/loading";
 import ProductTile from "../lib/productTile";
-import { IGender, IProduct } from "../../types";
+import { IFilterProducts, IGender, IProduct } from "../../types";
 import Header from "./header";
 import Filters from "./filters";
 import ViewMore from "./viewMore";
-
-interface IParams {
-    page?: string;
-}
 
 interface IFilters {
     gender: IGender;
@@ -42,10 +38,16 @@ const MensIndex = () => {
     }, []);
 
     async function setQsData(propName: string, value: number | string) {
+        const updatedFilters: any = {
+            ...qsData,
+            gender: "mens",
+            [propName]: value,
+        };
         history.push({
             pathname: "",
-            search: encode({ ...qsData, [propName]: value }),
+            search: encode(updatedFilters),
         });
+        productStore.getProducts(updatedFilters);
     }
 
     function goToProduct(productId: string) {
