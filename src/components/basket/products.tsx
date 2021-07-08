@@ -24,7 +24,7 @@ function BasketProducts({ basket }: IProps) {
                 </div>
             ) : (
                 <div style={{ textAlign: "center", padding: 50 }}>
-                    <Typography variant="h6">
+                    <Typography variant="h6" id="basket-empty-title">
                         Your basket is empty :(
                     </Typography>
                 </div>

@@ -12,6 +12,7 @@ function BasketHeader() {
             style={{ backgroundColor: "white" }}
             className={classes.basketTitleContainer}
             variant="h3"
+            id="basket-title"
         >
             Your Basket
         </Typography>

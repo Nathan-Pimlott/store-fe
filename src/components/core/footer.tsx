@@ -1,11 +1,10 @@
 import React from "react";
 import { Typography } from "@material-ui/core";
 
-interface IProps {
-    classes: any;
-}
+import Classes from "../../styles";
 
-function Footer({ classes }: IProps) {
+function Footer() {
+    const classes = Classes();
     return (
         <div
             style={{

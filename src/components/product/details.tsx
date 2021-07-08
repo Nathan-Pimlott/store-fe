@@ -40,11 +40,11 @@ const ProductDetails = ({
             <div style={{ backgroundColor: "white", padding: 20 }}>
                 <Typography variant="h4">{product.name}</Typography>
 
-                <Typography style={{ marginTop: 20 }}>
+                <Typography style={{ marginTop: 20 }} id="product-description">
                     {product.description}
                 </Typography>
 
-                <Typography style={{ fontWeight: "bold" }}>
+                <Typography style={{ fontWeight: "bold" }} id="product-price">
                     {convertToCurrency(product.price)}
                 </Typography>
 
@@ -56,12 +56,11 @@ const ProductDetails = ({
                 </InputLabel>
 
                 <Select
-                    labelId={`${product.name}-size`}
-                    id={`${product.name}-size`}
+                    labelId="product-size"
+                    id={`product-size`}
                     style={{ minWidth: 250, maxWidth: 300 }}
                     inputProps={{
-                        name: `${product.name}-size`,
-                        id: `${product.name}-size`,
+                        name: "product-size",
                     }}
                     value={state.size}
                     onChange={(e) =>
@@ -72,18 +71,22 @@ const ProductDetails = ({
                     }
                 >
                     {sizes.map((size, idx) => (
-                        <MenuItem value={size.value} key={idx}>
+                        <MenuItem
+                            value={size.value}
+                            key={idx}
+                            id={`product-size-${size.value}`}
+                        >
                             {size.label}
                         </MenuItem>
                     ))}
                 </Select>
 
-                <Typography style={{ marginTop: 20 }}>
+                <Typography style={{ marginTop: 20 }} id="product-color">
                     Colour: {product.color}
                 </Typography>
 
                 <Button
-                    id="add-to-basket-button"
+                    id="product-add-to-basket"
                     type="submit"
                     disabled={loading}
                     fullWidth

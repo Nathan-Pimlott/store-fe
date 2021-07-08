@@ -16,6 +16,7 @@ const ProductImage = ({ imgSrc, classes }: IProductImageProps) => {
                     height: 600,
                     width: "auto",
                 }}
+                id="product-image"
             />
         </div>
     );

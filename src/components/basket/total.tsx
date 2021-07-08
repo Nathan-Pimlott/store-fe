@@ -26,7 +26,11 @@ function BasketTotal({ basket }: IProps) {
     return (
         <div style={{ backgroundColor: "white" }}>
             <div className={classes.basketTotalContainer}>
-                <Typography variant="h6" className={classes.basketSubTitle}>
+                <Typography
+                    variant="h6"
+                    className={classes.basketSubTitle}
+                    id="basket-total-title"
+                >
                     Total
                 </Typography>
                 <div
@@ -35,10 +39,16 @@ function BasketTotal({ basket }: IProps) {
                         flex: 1,
                     }}
                 >
-                    <Typography style={{ flex: 1, fontWeight: "bold" }}>
+                    <Typography
+                        style={{ flex: 1, fontWeight: "bold" }}
+                        id="basket-subtotal-label"
+                    >
                         Sub total
                     </Typography>
-                    <Typography style={{ flex: 1, textAlign: "right" }}>
+                    <Typography
+                        style={{ flex: 1, textAlign: "right" }}
+                        id="basket-subtotal"
+                    >
                         {convertToCurrency(basketTotal)}
                     </Typography>
                 </div>
@@ -49,10 +59,16 @@ function BasketTotal({ basket }: IProps) {
                         marginTop: 10,
                     }}
                 >
-                    <Typography style={{ flex: 1, fontWeight: "bold" }}>
+                    <Typography
+                        style={{ flex: 1, fontWeight: "bold" }}
+                        id="basket-shipping-label"
+                    >
                         Shipping
                     </Typography>
-                    <Typography style={{ flex: 1, textAlign: "right" }}>
+                    <Typography
+                        style={{ flex: 1, textAlign: "right" }}
+                        id="basket-shipping"
+                    >
                         {convertToCurrency(shipping)}
                     </Typography>
                 </div>
@@ -63,10 +79,16 @@ function BasketTotal({ basket }: IProps) {
                         marginTop: 10,
                     }}
                 >
-                    <Typography style={{ flex: 1, fontWeight: "bold" }}>
+                    <Typography
+                        style={{ flex: 1, fontWeight: "bold" }}
+                        id="basket-total-label"
+                    >
                         Total
                     </Typography>
-                    <Typography style={{ flex: 1, textAlign: "right" }}>
+                    <Typography
+                        style={{ flex: 1, textAlign: "right" }}
+                        id="basket-total"
+                    >
                         {convertToCurrency(total)}
                     </Typography>
                 </div>
@@ -76,6 +98,7 @@ function BasketTotal({ basket }: IProps) {
                     variant="contained"
                     color="secondary"
                     style={{ marginTop: 20 }}
+                    id="basket-checkout-button"
                 >
                     Checkout
                 </Button>
@@ -83,6 +106,7 @@ function BasketTotal({ basket }: IProps) {
                 <Typography
                     variant="body2"
                     style={{ marginTop: 20, textAlign: "center" }}
+                    id="basket-payments-label"
                 >
                     We accept these payment methods.
                 </Typography>

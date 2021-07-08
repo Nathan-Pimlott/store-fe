@@ -16,6 +16,7 @@ function ProductHeader({ productName }: IProps) {
             style={{ backgroundColor: "white" }}
             className={classes.basketTitleContainer}
             variant="h3"
+            id="product-title"
         >
             {productName}
         </Typography>

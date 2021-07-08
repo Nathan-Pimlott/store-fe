@@ -8,7 +8,7 @@ import { IProduct } from "../../types";
 import Classes from "../../styles";
 import BasketStore from "../../stores/basket";
 import { convertToCurrency } from "../../utils";
-import { Quantity } from "../lib";
+import { Quantity } from "./quantity";
 
 interface IProps {
     product: IProduct;
@@ -40,15 +40,25 @@ const InlineProduct = ({ product, idx }: IProps) => {
                     src={product.img}
                     alt="Product image"
                     className={classes.basketProductImage}
+                    id="basket-product-image"
                 />
             </div>
             <div className={classes.basketProductDetails}>
-                <Typography className={classes.basketProductTitle} variant="h6">
+                <Typography
+                    className={classes.basketProductTitle}
+                    variant="h6"
+                    id="basket-product-name"
+                >
                     {product.name}
                 </Typography>
-                <Typography>{product.description}</Typography>
+                <Typography id="basket-product-description">
+                    {product.description}
+                </Typography>
                 <div style={{ display: "flex" }}>
-                    <Typography style={{ margin: "auto 0" }}>
+                    <Typography
+                        style={{ margin: "auto 0" }}
+                        id="basket-product-price"
+                    >
                         {convertToCurrency(product.price)}
                     </Typography>
                     <Quantity
@@ -63,6 +73,7 @@ const InlineProduct = ({ product, idx }: IProps) => {
                     aria-label="delete"
                     className={classes.basketRemoveProductButton}
                     onClick={removeProduct}
+                    id="basket-remove-product"
                 >
                     <Delete className={classes.basketRemoveProductIcon} />
                 </IconButton>

@@ -62,7 +62,11 @@ const MensIndex = () => {
         <div>
             <Header />
             <Filters filters={qsData} setFilters={setQsData} />
-            <Grid container className={classes.productOverviewOuterContainer}>
+            <Grid
+                container
+                className={classes.productOverviewOuterContainer}
+                id="mens-product-container"
+            >
                 {productStore.products?.map((product: IProduct, idx) => (
                     <Grid
                         className={classes.productTileInnerContainer}

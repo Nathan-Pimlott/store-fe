@@ -12,6 +12,7 @@ function MensHeader() {
             style={{ backgroundColor: "white" }}
             className={classes.basketTitleContainer}
             variant="h3"
+            id="mens-title"
         >
             Mens
         </Typography>
